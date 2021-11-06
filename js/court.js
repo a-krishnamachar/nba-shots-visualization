@@ -9,6 +9,7 @@ function CourtChart (_parentElement, _data) {
   this.initVis();
 }
 
+
 CourtChart.prototype.initVis = function() {
   var vis = this;
 
@@ -19,7 +20,7 @@ CourtChart.prototype.initVis = function() {
 
   vis.svg = d3.select("#court-area").append("svg")
 
-  vis.svg = d3.select("#" + vis.parentElement).append("svg")
+  //vis.svg = d3.select("#" + vis.parentElement).append("svg")
       .attr("viewBox", '0 0 600 600')
 	    //.attr("width", vis.width + vis.margin.left + vis.margin.right)
 	    //.attr("height", vis.height + vis.margin.top + vis.margin.bottom)
@@ -58,10 +59,65 @@ CourtChart.prototype.initVis = function() {
        //(0,0) in the NBA api is at the center of the hoop => (200,340)
        //x+200, y+340
 
-       vis.svg.append("circle")
-       .attr("r", 4)
-       .attr("cx", 200)
-       .attr("cy",340)
+       //waiting to populate data from API!! pull datapoints into a points array and then
+       //can add them as needed
+
+       vis.svg.append("rect")
+        .attr("width", widthCourt/4)
+        .attr("height", heightCourt/5)
+        // .attr("x", 200)
+        // .attr("y",340)
+        .attr("x", 0)
+        .attr("y", 308)
+        .attr("fill", "white")
+        .style("opacity", 0.2)
+        .on("mouseover", handleMouseOver)
+        .on("mouseout", handleMouseOut);
+
+        vis.svg.append("rect")
+         .attr("width", widthCourt/4)
+         .attr("height", heightCourt/5)
+         // .attr("x", 200)
+         // .attr("y",340)
+         .attr("x", 100)
+         .attr("y", 308)
+         .attr("fill", "white")
+         .style("opacity", 0.2)
+         .on("mouseover", handleMouseOver)
+         .on("mouseout", handleMouseOut);
+
+         vis.svg.append("rect")
+          .attr("width", widthCourt/4)
+          .attr("height", heightCourt/5)
+          // .attr("x", 200)
+          // .attr("y",340)
+          .attr("x", 200)
+          .attr("y", 308)
+          .attr("fill", "white")
+          .style("opacity", 0.2)
+          .on("mouseover", handleMouseOver)
+          .on("mouseout", handleMouseOut);
+
+          vis.svg.append("rect")
+           .attr("width", widthCourt/4)
+           .attr("height", heightCourt/5)
+           // .attr("x", 200)
+           // .attr("y",340)
+           .attr("x", 300)
+           .attr("y", 308)
+           .attr("fill", "white")
+           .style("opacity", 0.2)
+           .on("mouseover", handleMouseOver)
+           .on("mouseout", handleMouseOut);
+
+
+      function handleMouseOver(d, i) {
+        d3.select(this).attr("r", 10).style("fill", "blue").style("opacity",0.7);
+      }
+
+      function handleMouseOut(d,i) {
+        d3.select(this).attr("r", 5.5).style("fill", "white").style("opacity", 0.2);
+      }
 
        vis.updateVis();
 
@@ -84,7 +140,7 @@ CourtChart.prototype.updateVis = function() {
 
   categories.exit().remove();
 
-  
+
 
 
 }
