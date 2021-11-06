@@ -1,22 +1,22 @@
-var courtSvg = d3.select("#court-area").append("svg")
-  .attr("viewBox", '0 0 600 600')
+var courtSvg;
 
 var widthCourt = 400;
 var heightCourt = 400;
 var court;
 
-allData = [];
+allData = [0,0,0,0,0];
 
-createVis();
 
 function createVis() {
 
-	// TO-DO: Instantiate visualization objects here
-
-    court = new Court("court-area",allData);
-    //timeline = new Timeline("timeline",allData.years);
+    ///Instantiate visualization objects here
+    console.log("help");
+    court = new CourtChart("court-area",allData);
 
 }
+
+createVis();
+
 // function loadChart() {
 //   //console.log(data);
 //
