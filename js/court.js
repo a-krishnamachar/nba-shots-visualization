@@ -62,11 +62,10 @@ CourtChart.prototype.initVis = function() {
        //waiting to populate data from API!! pull datapoints into a points array and then
        //can add them as needed
 
+       //first layer of blocks (closest to hoop)
        vis.svg.append("rect")
         .attr("width", widthCourt/4)
         .attr("height", heightCourt/5)
-        // .attr("x", 200)
-        // .attr("y",340)
         .attr("x", 0)
         .attr("y", 308)
         .attr("fill", "white")
@@ -77,8 +76,6 @@ CourtChart.prototype.initVis = function() {
         vis.svg.append("rect")
          .attr("width", widthCourt/4)
          .attr("height", heightCourt/5)
-         // .attr("x", 200)
-         // .attr("y",340)
          .attr("x", 100)
          .attr("y", 308)
          .attr("fill", "white")
@@ -89,8 +86,6 @@ CourtChart.prototype.initVis = function() {
          vis.svg.append("rect")
           .attr("width", widthCourt/4)
           .attr("height", heightCourt/5)
-          // .attr("x", 200)
-          // .attr("y",340)
           .attr("x", 200)
           .attr("y", 308)
           .attr("fill", "white")
@@ -101,8 +96,6 @@ CourtChart.prototype.initVis = function() {
           vis.svg.append("rect")
            .attr("width", widthCourt/4)
            .attr("height", heightCourt/5)
-           // .attr("x", 200)
-           // .attr("y",340)
            .attr("x", 300)
            .attr("y", 308)
            .attr("fill", "white")
@@ -110,6 +103,56 @@ CourtChart.prototype.initVis = function() {
            .on("mouseover", handleMouseOver)
            .on("mouseout", handleMouseOut);
 
+           vis.svg.append("rect")
+            .attr("width", widthCourt/4)
+            .attr("height", heightCourt/5)
+            .attr("x", 300)
+            .attr("y", 308)
+            .attr("fill", "white")
+            .style("opacity", 0.2)
+            .on("mouseover", handleMouseOver)
+            .on("mouseout", handleMouseOut);
+
+            //second layer of blocks
+            vis.svg.append("rect")
+             .attr("width", widthCourt/4)
+             .attr("height", heightCourt/5)
+             .attr("x", 0)
+             .attr("y", 228)
+             .attr("fill", "white")
+             .style("opacity", 0.2)
+             .on("mouseover", handleMouseOver)
+             .on("mouseout", handleMouseOut);
+
+             vis.svg.append("rect")
+              .attr("width", widthCourt/4)
+              .attr("height", heightCourt/5)
+              .attr("x", 100)
+              .attr("y", 228)
+              .attr("fill", "white")
+              .style("opacity", 0.2)
+              .on("mouseover", handleMouseOver)
+              .on("mouseout", handleMouseOut);
+
+              vis.svg.append("rect")
+               .attr("width", widthCourt/4)
+               .attr("height", heightCourt/5)
+               .attr("x", 200)
+               .attr("y", 228)
+               .attr("fill", "white")
+               .style("opacity", 0.2)
+               .on("mouseover", handleMouseOver)
+               .on("mouseout", handleMouseOut);
+
+               vis.svg.append("rect")
+                .attr("width", widthCourt/4)
+                .attr("height", heightCourt/5)
+                .attr("x", 300)
+                .attr("y", 228)
+                .attr("fill", "white")
+                .style("opacity", 0.2)
+                .on("mouseover", handleMouseOver)
+                .on("mouseout", handleMouseOut);
 
       function handleMouseOver(d, i) {
         d3.select(this).attr("r", 10).style("fill", "blue").style("opacity",0.7);
