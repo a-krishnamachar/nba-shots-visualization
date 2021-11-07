@@ -1,9 +1,6 @@
 body {
 	font-family: 'Georgia', serif;
   background-color: #dfe1e8;
-}
-
-#chart-area {
-
-  
+  margin-left: 100px;
+  margin-right: 100px;
 }

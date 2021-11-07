@@ -1,0 +1,147 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="">
+        <title>Final Project Process Book</title>
+        <link rel="stylesheet" href="processbook/process_style.css">
+    </head>
+    <body>
+        <h1>Process Book - Visualizing NBA Player Shot Accuracy</h1>
+        Aditya Krishnamachar, David Higuchi, Will Levan | FrisVis group
+        <br>
+        akrishnamachar@wustl.edu; davidhiguchi@wustl.edu; levanw@wustl.edu
+        <br>
+
+        <h3>Background and Motivation</h3>
+        <p>Over the past decade, modern data and analytics has revolutionized how NBA teams strategize and play basketball.
+          Every team now has their own analytics departments and every game, cameras track precisely the
+          movement of the ball and players on the court. Teams have used this data to determine the shots
+          with the highest expected value, leading to a dramatic rise in  three-point shots.
+          Players now wear health sensors that monitor their fatigue during practice, helping teams know when it
+          is best to give a star player rest.
+        </p>
+        <p>
+          Teams have always used statistics and data to inform their decision making, however, in the past their data was basic and
+          limited to things like shots, assists and rebounds. Now both teams and fans alike have
+          access to highly detailed data for every game. However, increasingly detailed tracking leads
+           to the challenge of having to sort through and analyze an ever increasing amount of data.
+        </p>
+        <p>
+        </p>
+        <h3>Related Work</h3>
+        <p>We took inspiration from a few websites + visualizations that we have seen in the "wild".
+          Foremost among these were a) visuals similar to the below heatmap (this one taken from Statsbomb [1]).
+        </p>
+        <img src="processbook/proposaldata/statsbomb.png" alt="heatmap" width="450" height="400">
+        <p>
+          Teams have always used statistics and data to inform their decision making, however, in the past their data was basic and
+          limited to things like shots, assists and rebounds. Now both teams and fans alike have
+          access to highly detailed data for every game. However, increasingly detailed tracking leads
+           to the challenge of having to sort through and analyze an ever increasing amount of data.
+        </p>
+        <p>
+        </p>
+        <h3>Project Objectives / Questions Answered</h3>
+        <p>We started out with the question, "I wonder how accurate LeBron is from the right side
+          of the court v. the left?"
+        </p>
+        <p>As our thinking evolved, we realized we wanted to create something that would
+          effectively display a player's shot accuracy from different parts of the basketball court.
+        </p>
+        <p>Through this project, we intend to convey information about individual players’ shot accuracy
+          from specific parts on the court.
+          The goal of this project is to sift through NBA player data to find meaningful insights
+          and present them in an intuitive, visually appealing implementation.
+
+          We hope to also boost enthusiasm of the game for fans and non-fans alike, and increase a
+          baseline knowledge of the sport amongst all viewers!
+        </p>
+        <h3>Data</h3>
+        <p>
+          We plan on getting our data from the NBA official website
+          (https://www.nba.com/stats/) which contains detailed statistics from every NBA game
+           played dating back over twenty years. By using data supplied by the league itself,
+           we can trust that the information is accurate and trustworthy.
+        </p>
+        <p>We expect to do some data cleanup as we will likely encounter more data than we
+          actually need for the scope of this project, however, we expect the data itself to be
+          easy to work with and won’t require much post processing. This is because the data we are
+          interested in are mostly statistics from NBA games which have been checked many times prior
+           to viewing them which makes any mistakes extremely unlikely.
+        </p>
+
+        <p>
+          We used a python package called nba_api
+      (https://pypi.org/project/nba-api/) to help us access the appropriate data for this project.
+      This is an API client for www.nba.com that makes the API endpoints on the websites easier to
+      access and helped make the process of data gathering more efficient.
+      Once we had understood the scale of the data to the full extent,
+        we then moved to integrating the call to the API directly into our javascript code.
+      </p>
+
+        <h3>Exploratory Data Analysis (EDA)</h3>
+
+        <p>We initally utilized the python dataframe tool to inspect and understand our data.
+          This was the quickest and most efficient way to rapidly iterate through the thousands of
+          data points that we needed to analyze (hundreds of individual player shots; that then needed to
+          be aggregated into one holistic value for the chart displays).
+        </p>
+        <p>
+          The main goal of this visualization was to portray a specific player’s shooting percentage in different court locations.
+          We also included league average (%s) of shots taken from those court locations.
+          We will necessarily need to include those data points across an entire season for any
+          player with, for example, more than 20 games played (20 arbitrarily chosen, number might change).
+        </p>
+
+        <h3>Design Evolution</h3>
+        <div id="designs">
+          <img src="processbook/proposaldata/01.jpeg" alt="processbook images" width="750" height="1000">
+          <br>
+          <img src="processbook/proposaldata/02.jpeg" alt="processbook images" width="750" height="1000">
+          <br>
+          <img src="processbook/proposaldata/03.jpeg" alt="processbook images" width="750" height="1000">
+          <br>
+          <img src="processbook/proposaldata/04.jpeg" alt="processbook images" width="750" height="1000">
+          <br>
+          <img src="processbook/proposaldata/05.jpeg" alt="processbook images" width="750" height="1000">
+          <br>
+          <img src="processbook/proposaldata/realization.jpeg" alt="processbook images" width="750" height="1000">
+
+        </div>
+        <p>Above, you can see how our design process initially looked. We used the Five Sheet Design Methodology
+          to instruct and inform our process.
+        </p>
+
+        <h3>Implementation</h3>
+        <p>The main display is a base image of half of a basketball court (see above images). This serves as the background
+          for the main visualization. The intent of this visualization is for a user to be able to quickly determine how accurate
+          player X is from a specific section of the basketball court.
+          <br>
+          Users hovering over different portions of court will display shot
+            accuracy on popup (tooltip). <br>
+            (Secondary display) - A separate bar chart populates showing the selected player’s shot % compared to the
+            league average for each part of the court.
+        </p>
+        <p>Users are able to "kickstart" the visualization by
+          searching for players by name at the top of the page. The intent here is for a user to
+          identify a specific player and then rapidly get the relevant information about that player.
+          <br>
+          For example, a user could select Chris Paul. The visualization will populate his
+          average scoring accuracy + information.
+        </p>
+
+        <h3>Evaluation</h3>
+        <p>
+        </p>
+        <p>
+        </p>
+        <p>
+        </p>
+        <h4>References</h4>
+        <li>[1] https://statsbomb.com/2019/10/the-incredible-tactical-rb-leipzig-machine-part-two-defensive-cogs-in-need-of-repair/</li>
+        <li>[2] https://statsbomb.com/2019/10/the-incredible-tactical-rb-leipzig-machine-part-two-defensive-cogs-in-need-of-repair/</li>
+        <li>[3] https://statsbomb.com/2019/10/the-incredible-tactical-rb-leipzig-machine-part-two-defensive-cogs-in-need-of-repair/</li>
+
+    </body>
+</html>
