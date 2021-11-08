@@ -13,7 +13,7 @@
         akrishnamachar@wustl.edu; davidhiguchi@wustl.edu; levanw@wustl.edu
         <br>
 
-        <h3>Background and Motivation</h3>
+        <h3>Overview and Motivation</h3>
         <p>Over the past decade, modern data and analytics has revolutionized how NBA teams strategize and play basketball.
           Every team now has their own analytics departments and every game, cameras track precisely the
           movement of the ball and players on the court. Teams have used this data to determine the shots
@@ -132,11 +132,19 @@
         </p>
 
         <h3>Evaluation</h3>
+        <p>Rather than being a collection of discrete points, the data was actually far more interconnected
+          than we thought. We were able to process and sort through the information efficiently given that the
+          API source contained a number of "zones". The below image shows a snapshot of the data, and the relevant
+          "zone" information. See the "SHOT_ZONE_AREA" and "SHOT_ZONE_RANGE" especially.
+        </p>
+        <img src="processbook/proposaldata/zone.png" alt="zonedata" width="500" height="350">
         <p>
+          As we went deeper into building our visualizations, we noticed that we were able to
+          combine a few of the data features to get the information we wanted (X,Y locations; shot zone areas; etc).
+          There was no single "silver bullet"; rather we had to leverage these different features.
         </p>
         <p>
-        </p>
-        <p>
+        
         </p>
         <h4>References</h4>
         <li>[1] https://statsbomb.com/2019/10/the-incredible-tactical-rb-leipzig-machine-part-two-defensive-cogs-in-need-of-repair/</li>

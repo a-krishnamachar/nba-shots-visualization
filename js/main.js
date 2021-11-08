@@ -4,8 +4,19 @@ var widthCourt = 400;
 var heightCourt = 400;
 var court;
 
-allData = [0,0,0,0,0];
+allData = [];
 
+loadData();
+
+function loadData() {
+  d3.json("data/sample1.json").then(function(jsonData){
+
+  allData = jsonData;
+
+  createVis();
+
+  });
+}
 
 function createVis() {
 
@@ -15,7 +26,6 @@ function createVis() {
 
 }
 
-createVis();
 
 // function loadChart() {
 //   //console.log(data);

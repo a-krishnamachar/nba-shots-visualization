@@ -1,0 +1,25 @@
+{
+  "areas": [
+    {
+      "Left_far": 0.42105
+    },
+    {
+      "Center_far": 0.153846154
+    },
+    {
+      "Right_far": 0.46
+    },
+    {
+      "Paint": 0.2
+    },
+    {
+      "Leftcorner":	0.25
+    },
+    {
+      "midrange": 0.526315789
+    },
+    {
+      "restrictedarea": 0.636
+    }
+  ]
+}
