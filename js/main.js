@@ -9,7 +9,7 @@ allData = [];
 loadData();
 
 function loadData() {
-  d3.json("data/sample1.json").then(function(jsonData){
+  d3.csv("sample_lebrondata.csv").then(function(jsonData){
 
   allData = jsonData;
 

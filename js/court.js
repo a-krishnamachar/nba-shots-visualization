@@ -17,7 +17,6 @@ CourtChart.prototype.initVis = function() {
 
 	vis.width = 440 - vis.margin.left - vis.margin.right,
   vis.height = 500 - vis.margin.top - vis.margin.bottom;
-  console.log(vis.data);
 
   vis.svg = d3.select("#court-area").append("svg")
   //vis.svg = d3.select("#" + vis.parentElement).append("svg")
@@ -174,6 +173,35 @@ CourtChart.prototype.initVis = function() {
         .attr("y", 420)
         .attr("fill", "black");
 
+      console.log("here");
+      console.log(vis.data);
+
+      var xLocationScale = d3.scaleLinear()
+        .domain([-250, 250])
+        .range([0, vis.width]);
+
+      var yLocationScale = d3.scaleLinear()
+        .domain([-50, 500])
+        .range([0, vis.height]);
+
+      var shotPoint = vis.svg.selectAll(".shot-point")
+        .data(vis.data);
+
+      shotPoint.enter().append("circle")
+        .merge(shotPoint)
+        .attr("class", "shot-point")
+        .attr('cx', function(d, i) {
+          // console.log(d.LOC_X);
+          return xLocationScale(parseFloat(d.LOC_X));
+        })
+        .attr('cy', function(d, i) {
+          return vis.height - yLocationScale(parseFloat(d.LOC_Y));
+        })
+        .attr("r", 2)
+        .style("fill", "black");
+
+      shotPoint.exit().remove();
+
       function handleMouseOver(d, i) {
         d3.select(this).attr("r", 10).style("fill", "lightblue").style("opacity",0.7);
         vis.svg.append("text")
@@ -194,7 +222,10 @@ CourtChart.prototype.initVis = function() {
 
       }
 
+
        vis.updateVis();
+
+      
 
 }
 
