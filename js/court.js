@@ -205,7 +205,6 @@ CourtChart.prototype.initVis = function() {
           .attr("fill", "black")
           .text(function(d,i) {
             console.log(vis.regionData.areas[i])
-          
             //return area depending on which is highlighted -> get coordinates
             return "Accuracy: " + vis.regionData.areas[i];
           });
@@ -220,7 +219,7 @@ CourtChart.prototype.initVis = function() {
 
        vis.updateVis();
 
-      
+
 
 }
 
