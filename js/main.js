@@ -13,18 +13,19 @@ function loadData() {
     d3.json("data/sample1.json").then(function(jsonData) {
       shotData = csvData;
       regionData = jsonData;
-      createVis();
+      courtVis();
 
     })
 
   });
 }
 
-function createVis() {
+function courtVis() {
 
     ///Instantiate visualization objects here
     console.log("help");
     court = new CourtChart("court-area",shotData,regionData);
+    distanceChart = new DistanceChart("distance-chart-area", shotData);
 
 }
 
