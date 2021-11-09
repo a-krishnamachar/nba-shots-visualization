@@ -9,11 +9,13 @@ allData = [];
 loadData();
 
 function loadData() {
-  d3.csv("sample_lebrondata.csv").then(function(jsonData){
+  d3.csv("sample_lebrondata.csv").then(function(csvData){
+    d3.json("data/sample1.json").then(function(jsonData) {
+      shotData = csvData;
+      regionData = jsonData;
+      createVis();
 
-  allData = jsonData;
-
-  createVis();
+    })
 
   });
 }
@@ -22,7 +24,7 @@ function createVis() {
 
     ///Instantiate visualization objects here
     console.log("help");
-    court = new CourtChart("court-area",allData);
+    court = new CourtChart("court-area",shotData,regionData);
 
 }
 

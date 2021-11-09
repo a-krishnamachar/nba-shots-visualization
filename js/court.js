@@ -1,7 +1,8 @@
 
-function CourtChart (_parentElement, _data) {
+function CourtChart (_parentElement, _data, _data2) {
   this.parentElement = _parentElement;
-  this.data = _data;
+  this.shotData = _data;
+  this.regionData = _data2;
   this.displayData = [];
 
   //console.log(this.data);
@@ -49,18 +50,6 @@ CourtChart.prototype.initVis = function() {
       d3.selectAll('dot').remove();
 
       var allText =  vis.svg.selectAll("text");
-
-       //var points = svg.selectAll("dot").data(playerData)
-       //.enter()
-
-       //(0,0) in our svg is at the top left
-       //(0,0) in the NBA api is at the center of the hoop => (200,340)
-       //x+200, y+340
-
-       //waiting to populate data from API!! pull datapoints into a points array and then
-       //can add them as needed
-
-       //first layer of blocks (closest to hoop)
 
        //left corner 3
        vis.svg.append("rect")
@@ -174,7 +163,7 @@ CourtChart.prototype.initVis = function() {
         .attr("fill", "black");
 
       console.log("here");
-      console.log(vis.data);
+      console.log(vis.shotData);
 
       // SHOT POINT DYNAMIC CREATION PLUS PROPER SCALES
 
@@ -187,7 +176,7 @@ CourtChart.prototype.initVis = function() {
         .range([0, vis.height]);
 
       var shotPoint = vis.svg.selectAll(".shot-point")
-        .data(vis.data);
+        .data(vis.shotData);
 
       shotPoint.enter().append("circle")
         .merge(shotPoint)
@@ -199,7 +188,10 @@ CourtChart.prototype.initVis = function() {
           return vis.height - yLocationScale(parseFloat(d.LOC_Y));
         })
         .attr("r", 2)
-        .style("fill", "black");
+        .style("fill", function(d, i) {
+          if (d.SHOT_MADE_FLAG == "1") { return "black"; }
+          else { return "red"; }
+        });
 
       shotPoint.exit().remove();
 
@@ -212,10 +204,10 @@ CourtChart.prototype.initVis = function() {
           .attr("y", 420)
           .attr("fill", "black")
           .text(function(d,i) {
-            console.log(vis.data.areas[i])
+            console.log(vis.regionData.areas[i])
           
             //return area depending on which is highlighted -> get coordinates
-            return "Accuracy: " + vis.data.areas[i];
+            return "Accuracy: " + vis.regionData.areas[i];
           });
 
       }
