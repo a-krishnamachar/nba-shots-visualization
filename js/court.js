@@ -176,6 +176,8 @@ CourtChart.prototype.initVis = function() {
       console.log("here");
       console.log(vis.data);
 
+      // SHOT POINT DYNAMIC CREATION PLUS PROPER SCALES
+
       var xLocationScale = d3.scaleLinear()
         .domain([-250, 250])
         .range([0, vis.width]);
@@ -191,7 +193,6 @@ CourtChart.prototype.initVis = function() {
         .merge(shotPoint)
         .attr("class", "shot-point")
         .attr('cx', function(d, i) {
-          // console.log(d.LOC_X);
           return xLocationScale(parseFloat(d.LOC_X));
         })
         .attr('cy', function(d, i) {
@@ -201,6 +202,8 @@ CourtChart.prototype.initVis = function() {
         .style("fill", "black");
 
       shotPoint.exit().remove();
+
+      // END SHOT POINT DYNAMIC CREATION
 
       function handleMouseOver(d, i) {
         d3.select(this).attr("r", 10).style("fill", "lightblue").style("opacity",0.7);
