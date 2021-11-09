@@ -221,7 +221,7 @@ CourtChart.prototype.initVis = function() {
           .attr("fill", "black")
           .text(function(d,i) {
             //   if(currClass == vis.regionData.areas(i)) {
-            console.log(vis.regionData.areas[0].Values)
+            console.log(vis.regionData.areas + "['" + currClass + "']")
 
             return "Accuracy: " + vis.regionData.areas[1] + "%";
             //return area depending on which is highlighted -> get coordinates
