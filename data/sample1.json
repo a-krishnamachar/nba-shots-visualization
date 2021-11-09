@@ -16,7 +16,13 @@
       "Leftcorner":	0.25
     },
     {
-      "midrange": 0.526315789
+      "Rightcorner": 0.0
+    },
+    {
+      "midrange_left": 0.526315789
+    },
+    {
+      "midrange_right": 0.5418
     },
     {
       "restrictedarea": 0.636

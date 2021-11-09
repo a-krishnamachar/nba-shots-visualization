@@ -53,6 +53,7 @@ CourtChart.prototype.initVis = function() {
 
        //left corner 3
        vis.svg.append("rect")
+        .attr("class", "Leftcorner")
         .attr("width", widthCourt/4)
         .attr("height", heightCourt/5)
         .attr("x", 0)
@@ -64,6 +65,7 @@ CourtChart.prototype.initVis = function() {
 
         //closest to hoop "restricted area"
         vis.svg.append("rect")
+         .attr("class", "restrictedarea")
          .attr("width", widthCourt/2)
          .attr("height", heightCourt/5)
          .attr("x", 100)
@@ -75,19 +77,21 @@ CourtChart.prototype.initVis = function() {
 
          //right corner 3
         vis.svg.append("rect")
+          .attr("class", "Rightcorner")
           .attr("width", widthCourt/4)
           .attr("height", heightCourt/5)
-         .attr("x", 300)
-         .attr("y", 308)
-         .attr("fill", "white")
-         .style("opacity", 0.2)
-         .on("mouseover", handleMouseOver)
-         .on("mouseout", handleMouseOut);
+          .attr("x", 300)
+          .attr("y", 308)
+          .attr("fill", "white")
+          .style("opacity", 0.2)
+          .on("mouseover", handleMouseOver)
+          .on("mouseout", handleMouseOut);
 
             //second layer of blocks
 
             //midrange left
         vis.svg.append("rect")
+          .attr("class", "midrange_left")
           .attr("width", widthCourt/4)
           .attr("height", heightCourt/5)
           .attr("x", 0)
@@ -99,6 +103,7 @@ CourtChart.prototype.initVis = function() {
 
              //in the paint
        vis.svg.append("rect")
+          .attr("class", "Paint")
           .attr("width", widthCourt/2)
           .attr("height", heightCourt/3)
           .attr("x", 100)
@@ -110,6 +115,7 @@ CourtChart.prototype.initVis = function() {
 
               //midrange right
        vis.svg.append("rect")
+        .attr("class", "midrange_left")
         .attr("width", widthCourt/4)
         .attr("height", heightCourt/5)
           .attr("x", 300)
@@ -123,6 +129,7 @@ CourtChart.prototype.initVis = function() {
 
                 // left far
         vis.svg.append("rect")
+           .attr("class", "Left_far")
            .attr("width", widthCourt/4)
            .attr("height", heightCourt/2.5)
            .attr("x", 0)
@@ -134,6 +141,7 @@ CourtChart.prototype.initVis = function() {
 
                  //top center
        vis.svg.append("rect")
+          .attr("class", "Center_far")
           .attr("width", widthCourt/2)
           .attr("height", heightCourt/4)
           .attr("x", 100)
@@ -145,6 +153,7 @@ CourtChart.prototype.initVis = function() {
 
                 //right far
       vis.svg.append("rect")
+        .attr("class", "Right_far")
         .attr("width", widthCourt/4)
         .attr("height", heightCourt/2.5)
         .attr("x", 300)
@@ -197,23 +206,33 @@ CourtChart.prototype.initVis = function() {
 
       // END SHOT POINT DYNAMIC CREATION
 
-      function handleMouseOver(d, i) {
+      function handleMouseOver(d) {
         d3.select(this).attr("r", 10).style("fill", "lightblue").style("opacity",0.7);
+        var currClass = d3.select(this).attr("class");
+        var test0 = vis.regionData.areas[0];
+        var ans = "";
+
+        //console.log(Object.Values(vis.regionData.areas));
+
         vis.svg.append("text")
+          .attr("class", "courtAccuracyLabel")
           .attr("x", 10)
           .attr("y", 420)
           .attr("fill", "black")
           .text(function(d,i) {
-            console.log(vis.regionData.areas[i])
+            //   if(currClass == vis.regionData.areas(i)) {
+            console.log(vis.regionData.areas[0].Values)
+
+            return "Accuracy: " + vis.regionData.areas[1] + "%";
             //return area depending on which is highlighted -> get coordinates
-            return "Accuracy: " + vis.regionData.areas[i];
+            //return "Accuracy: " + vis.regionData.areas[i];
           });
 
       }
 
       function handleMouseOut(d,i) {
         d3.select(this).attr("r", 5.5).style("fill", "white").style("opacity", 0.2);
-
+        d3.selectAll(".courtAccuracyLabel").remove();
       }
 
 
