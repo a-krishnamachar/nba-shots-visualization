@@ -26,7 +26,7 @@ CourtChart.prototype.initVis = function() {
 	    //.attr("height", vis.height + vis.margin.top + vis.margin.bottom)
        .append("g")
 
-  var courtBackgroundURL = "data/court.jpg";
+  var courtBackgroundURL = "data/nba_court.jpeg";
 
         vis.svg.append("svg:defs")
           .append("svg:pattern")
@@ -176,12 +176,16 @@ CourtChart.prototype.initVis = function() {
 
       // SHOT POINT DYNAMIC CREATION PLUS PROPER SCALES
 
+      let delayRandomizer = d3.scaleLinear()
+      .domain([0,1])
+      .range([0, 10000]);
+
       var xLocationScale = d3.scaleLinear()
         .domain([-250, 250])
         .range([0, vis.width]);
 
       var yLocationScale = d3.scaleLinear()
-        .domain([-50, 500])
+        .domain([-70, 450])
         .range([0, vis.height]);
 
       var shotPoint = vis.svg.selectAll(".shot-point")
@@ -200,7 +204,15 @@ CourtChart.prototype.initVis = function() {
         .style("fill", function(d, i) {
           if (d.SHOT_MADE_FLAG == "1") { return "black"; }
           else { return "red"; }
-        });
+        })     
+        .attr("visibility", "hidden")
+        .on("mouseover", shotMouseOver)
+        .on("mouseout", shotMouseOut)
+        .transition()
+        .delay(function() {
+          return delayRandomizer(Math.random());
+        })   
+        .attr("visibility", "visible");
 
       shotPoint.exit().remove();
 
@@ -233,6 +245,16 @@ CourtChart.prototype.initVis = function() {
       function handleMouseOut(d,i) {
         d3.select(this).attr("r", 5.5).style("fill", "white").style("opacity", 0.2);
         d3.selectAll(".courtAccuracyLabel").remove();
+      }
+
+      function shotMouseOver(d, i) {
+        console.log("Here");
+        console.log(i.SHOT_TYPE);
+        console.log(i.SHOT_ZONE_BASIC)
+      }
+
+      function shotMouseOut(d) {
+
       }
 
 
