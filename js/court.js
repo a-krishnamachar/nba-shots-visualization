@@ -174,6 +174,46 @@ CourtChart.prototype.initVis = function() {
       console.log("here");
       console.log(vis.shotData);
 
+      function handleMouseOver(d) {
+        d3.select(this).attr("r", 10).style("fill", "lightblue").style("opacity",0.7);
+        var currClass = d3.select(this).attr("class");
+        var test0 = vis.regionData.areas[0];
+        var ans = "";
+
+        //console.log(Object.Values(vis.regionData.areas));
+
+        vis.svg.append("text")
+          .attr("class", "courtAccuracyLabel")
+          .attr("x", 10)
+          .attr("y", 420)
+          .attr("fill", "black")
+          .text(function(d,i) {
+            //   if(currClass == vis.regionData.areas(i)) {
+            console.log(vis.regionData.areas + "['" + currClass + "']")
+
+            return "Accuracy: " + vis.regionData.areas[1] + "%";
+            //return area depending on which is highlighted -> get coordinates
+            //return "Accuracy: " + vis.regionData.areas[i];
+          });
+
+      }
+
+      function handleMouseOut(d,i) {
+        d3.select(this).attr("r", 5.5).style("fill", "white").style("opacity", 0.2);
+        d3.selectAll(".courtAccuracyLabel").remove();
+      }
+
+
+       vis.updateVis();
+
+
+
+}
+
+CourtChart.prototype.updateVis = function() {
+  var vis = this;
+
+  //populate data
       // SHOT POINT DYNAMIC CREATION PLUS PROPER SCALES
 
       let delayRandomizer = d3.scaleLinear()
@@ -218,34 +258,6 @@ CourtChart.prototype.initVis = function() {
 
       // END SHOT POINT DYNAMIC CREATION
 
-      function handleMouseOver(d) {
-        d3.select(this).attr("r", 10).style("fill", "lightblue").style("opacity",0.7);
-        var currClass = d3.select(this).attr("class");
-        var test0 = vis.regionData.areas[0];
-        var ans = "";
-
-        //console.log(Object.Values(vis.regionData.areas));
-
-        vis.svg.append("text")
-          .attr("class", "courtAccuracyLabel")
-          .attr("x", 10)
-          .attr("y", 420)
-          .attr("fill", "black")
-          .text(function(d,i) {
-            //   if(currClass == vis.regionData.areas(i)) {
-            console.log(vis.regionData.areas + "['" + currClass + "']")
-
-            return "Accuracy: " + vis.regionData.areas[1] + "%";
-            //return area depending on which is highlighted -> get coordinates
-            //return "Accuracy: " + vis.regionData.areas[i];
-          });
-
-      }
-
-      function handleMouseOut(d,i) {
-        d3.select(this).attr("r", 5.5).style("fill", "white").style("opacity", 0.2);
-        d3.selectAll(".courtAccuracyLabel").remove();
-      }
 
       function shotMouseOver(d, i) {
         console.log("Here");
@@ -257,31 +269,7 @@ CourtChart.prototype.initVis = function() {
 
       }
 
-
-       vis.updateVis();
-
-
-
-}
-
-CourtChart.prototype.updateVis = function() {
-  var vis = this;
-
-  //populate data
-  var categories = vis.svg.selectAll(".area")
-      .data(vis.displayData);
-
-  categories.enter().append("circle")
-    .attr("class", "dots")
-    // .style("fill", function(d,i) {
-    //   return colorScale();
-    // })
-    .style("fill", "red")
-
-
-  categories.exit().remove();
-
-
-
+      // ADDING SQUARES
+      // let row1 =
 
 }
