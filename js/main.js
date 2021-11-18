@@ -7,9 +7,10 @@ var court;
 allData = [];
 var playerArray = ["LeBron James", "Kyrie Irving", "Steph Curry", "Kevin Durant"];
 
-loadData();
 
-function loadData() {
+function loadData(playerInput, yearInput) {
+  //manually call player json file from specific year
+  //d3.json("data/" + playerInput + yearInput + ".json")
   d3.csv("sample_lebrondata.csv").then(function(csvData){
     d3.json("data/sample1.json").then(function(jsonData) {
       shotData = csvData;
@@ -32,23 +33,25 @@ function courtVis() {
 
 function searchFunc() {
   //sample player names array -- this will have ALL past allstars from 5/10 years
+
+  var listElements = document.getElementById('playerList');
+  //listElements.parentNode.removeChild(listElements);
   var li;
   var ul;
-  input = document.getElementById('playerSearch').value;
+  playerVal = document.getElementById('playerHeading').innerHTML;
+  playerInput = document.getElementById('playerSearch').value;
+  yearInput = document.getElementById('yearSearch').value;
+
   var node = document.createElement("li");
-  var textNode = document.createTextNode(input);
+  var textNode = document.createTextNode(playerInput + ", " + yearInput);
   node.appendChild(textNode);
-  console.log(input);
-  // for (var i=0; playerArray.length; i++) {
-  if(playerArray.includes(input)) {
+  console.log(playerInput);
+
+  if(playerArray.includes(playerInput)) {
       console.log('success');
-      // if(document.getElementById('playerList').contains(input)) {
-      //   console.log('already added');
-      // }
-      document.getElementById('playerList').appendChild(node);
+      //document.getElementById('playerList').appendChild(node);
+      document.getElementById('playerHeading').innerHTML = playerInput + ", " + yearInput;
+      loadData(playerInput, yearInput);
   }
-
-
-  // }
 
 }
