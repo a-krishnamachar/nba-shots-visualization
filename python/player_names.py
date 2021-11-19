@@ -13,6 +13,7 @@ from nba_api.stats.endpoints import playercareerstats
 nbaPlayers = players.get_players()
 activePlayers = {}
 for player in nbaPlayers:
+    print(player)
     playerID = playercareerstats.PlayerCareerStats(player_id=player['id']).get_data_frames()[0]
     playerID.set_index("SEASON_ID",inplace=True)
     try:
