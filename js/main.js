@@ -5,16 +5,21 @@ var heightCourt = 400;
 var court;
 
 allData = [];
-var playerArray = ["LeBron James", "Kyrie Irving", "Steph Curry", "Kevin Durant"];
+var playerArray = ["LeBron James", "Kyrie Irving", "Stephen Curry", "Kevin Durant"];
 
 
-function loadData(playerInput, yearInput) {
+function loadData(playerfirstInput, playerlastInput) {
+
+  // if (/\s/.test(playerInput)) {
+  //
+  // }
+
   //manually call player json file from specific year
-  //d3.json("data/" + playerInput + yearInput + ".json")
-  d3.csv("sample_lebrondata.csv").then(function(csvData){
-    d3.json("data/sample1.json").then(function(jsonData) {
-      shotData = csvData;
-      regionData = jsonData;
+  //d3.json("data/player_data/" + playerfirstInput + "_" + playerlastInput + ".json").then(function(jsonData1) {
+  d3.csv("sample_lebrondata.csv").then(function(jsonData1){
+    d3.json("data/sample1.json").then(function(jsonData2) {
+      shotData = jsonData1;
+      regionData = jsonData2;
       courtVis();
 
     })
@@ -24,8 +29,10 @@ function loadData(playerInput, yearInput) {
 
 function courtVis() {
 
+    //clear court so there aren't duplicates
+    d3.selectAll("svg").remove();
+
     ///Instantiate visualization objects here
-    console.log("help");
     court = new CourtChart("court-area",shotData,regionData);
     distanceChart = new DistanceChart("distance-chart-area", shotData);
 
@@ -39,19 +46,19 @@ function searchFunc() {
   var li;
   var ul;
   playerVal = document.getElementById('playerHeading').innerHTML;
-  playerInput = document.getElementById('playerSearch').value;
-  yearInput = document.getElementById('yearSearch').value;
+  playerfirstInput = document.getElementById('playerSearch').value;
+  playerlastInput = document.getElementById('yearSearch').value;
 
   var node = document.createElement("li");
-  var textNode = document.createTextNode(playerInput + ", " + yearInput);
+  var textNode = document.createTextNode(playerfirstInput + " " + playerlastInput);
   node.appendChild(textNode);
-  console.log(playerInput);
+  console.log(playerfirstInput);
 
-  if(playerArray.includes(playerInput)) {
+  if(playerArray.includes(playerfirstInput + " " + playerlastInput)) {
       console.log('success');
       //document.getElementById('playerList').appendChild(node);
-      document.getElementById('playerHeading').innerHTML = playerInput + ", " + yearInput;
-      loadData(playerInput, yearInput);
+      document.getElementById('playerHeading').innerHTML = playerfirstInput + " " + playerlastInput;
+      loadData(playerfirstInput, playerlastInput);
   }
 
 }
