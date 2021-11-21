@@ -180,8 +180,6 @@ CourtChart.prototype.initVis = function() {
         var test0 = vis.regionData.areas[0];
         var ans = "";
 
-        //console.log(Object.Values(vis.regionData.areas));
-
         vis.svg.append("text")
           .attr("class", "courtAccuracyLabel")
           .attr("x", 10)
@@ -244,14 +242,14 @@ CourtChart.prototype.updateVis = function() {
         .style("fill", function(d, i) {
           if (d.SHOT_MADE_FLAG == "1") { return "black"; }
           else { return "red"; }
-        })     
+        })
         .attr("visibility", "hidden")
         .on("mouseover", shotMouseOver)
         .on("mouseout", shotMouseOut)
         .transition()
         .delay(function() {
           return delayRandomizer(Math.random());
-        })   
+        })
         .attr("visibility", "visible");
 
       shotPoint.exit().remove();
