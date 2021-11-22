@@ -41,15 +41,14 @@ function courtVis() {
     d3.selectAll("svg").remove();
 
     //create court title + other
-    document.getElementById('courtTitle').innerHTML = "Court Visualization";
+    document.getElementById('courtTitle').innerHTML = "Court Shot Distribution + Heatmap";
     document.getElementById('courtTooltipClearText').innerHTML = "?";
     document.getElementById('courtTooltipText').innerHTML = "This chart displays a player's shots." +
     " Red = scored; black = missed.";
 
     document.getElementById('lineGraphTitle').innerHTML = "Accuracy (0-1) v. Distance from Hoop (ft)";
     document.getElementById('lineTooltipClearText').innerHTML = "?";
-    document.getElementById('lineTooltipText').innerHTML = "This chart displays a player's shots." +
-    " Red = scored; black = missed.";
+    document.getElementById('lineTooltipText').innerHTML = "This chart displays a player's shot accuracy the further they get from the hoop."
     ///Instantiate visualization objects here
     court = new CourtChart("court-area",shotData);
 
@@ -77,7 +76,7 @@ function searchFunc() {
   for (var i=0; i<jsonData.length; i++) {
     if (jsonData[i].last_name == (playerlastInput) && (jsonData[i].first_name == (playerfirstInput))) {
       console.log(jsonData[i].last_name);
-      document.getElementById('playerHeading').innerHTML = playerfirstInput + " " + playerlastInput;
+      document.getElementById('playerHeading').innerHTML = playerfirstInput + " " + playerlastInput + " | 2021-22";
       loadData(playerfirstInput, playerlastInput);
 
     }

@@ -26,12 +26,16 @@ body {
 
 #tooltip #courtTooltipText {
 	visibility: hidden;
-  background-color: #555;
-  color: #fff;
+	background-color: #850c18;
+  /*background-color: #555;*/
+	color: #d9d0d1;
 	width: 100px;
+	border-radius: 6px;
+
 }
 #tooltip #courtTooltipText::after {
 	content: "";
+	border-width: 6px;
 
 }
 
@@ -44,12 +48,17 @@ body {
 
 #tooltip #lineTooltipText {
 	visibility: hidden;
-  background-color: #555;
-  color: #fff;
+	background-color: #850c18;
+  /*background-color: #555;*/
+	color: #d9d0d1;
 	width: 100px;
+	border-radius: 6px;
+
 }
 #tooltip #lineTooltipText::after {
 	content: "";
+	border-width: 6px;
+
 }
 
 #tooltip:hover #lineTooltipText{
@@ -59,5 +68,6 @@ body {
 }
 
 #playerHeading {
+	margin-left: 300px;
 	font-size: 18px;
 }
