@@ -23,7 +23,7 @@ function loadData(playerfirstInput, playerlastInput) {
       shotData = jsonData;
       courtVis();
   })
-  
+
   // d3.csv("sample_lebrondata.csv").then(function(jsonData1){
   //   d3.json("data/sample1.json").then(function(jsonData2) {
   //     shotData = jsonData1;
@@ -48,26 +48,31 @@ function courtVis() {
 }
 
 function searchFunc() {
-  //sample player names array -- this will have ALL past allstars from 5/10 years
+  //player names array load from json
+  d3.json("data/playerdata1.json").then(function(jsonData) {
+  //console.log(jsonData);
 
   var listElements = document.getElementById('playerList');
-  //listElements.parentNode.removeChild(listElements);
+
   var li;
   var ul;
   playerVal = document.getElementById('playerHeading').innerHTML;
-  playerfirstInput = document.getElementById('playerSearch').value;
-  playerlastInput = document.getElementById('yearSearch').value;
+  playerfirstInput = document.getElementById('playerfirstSearch').value;
+  playerlastInput = document.getElementById('playerlastSearch').value;
 
   var node = document.createElement("li");
   var textNode = document.createTextNode(playerfirstInput + " " + playerlastInput);
   node.appendChild(textNode);
-  console.log(playerfirstInput);
 
-  if(playerArray.includes(playerfirstInput + " " + playerlastInput)) {
-      console.log('success');
-      //document.getElementById('playerList').appendChild(node);
+  for (var i=0; i<jsonData.length; i++) {
+    if (jsonData[i].last_name == (playerlastInput) && (jsonData[i].first_name == (playerfirstInput))) {
+      console.log(jsonData[i].last_name);
       document.getElementById('playerHeading').innerHTML = playerfirstInput + " " + playerlastInput;
       loadData(playerfirstInput, playerlastInput);
+
+    }
   }
+
+})
 
 }
