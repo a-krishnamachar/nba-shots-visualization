@@ -16,15 +16,23 @@ function loadData(playerfirstInput, playerlastInput) {
 
   //manually call player json file from specific year
   //d3.json("data/player_data/" + playerfirstInput + "_" + playerlastInput + ".json").then(function(jsonData1) {
-  d3.csv("sample_lebrondata.csv").then(function(jsonData1){
-    d3.json("data/sample1.json").then(function(jsonData2) {
-      shotData = jsonData1;
-      regionData = jsonData2;
+  let fileName = playerfirstInput + "_" + playerlastInput;
+  console.log(fileName);
+
+  d3.json("data/player_data/" + fileName + ".json").then(function(jsonData) {
+      shotData = jsonData;
       courtVis();
+  })
+  
+  // d3.csv("sample_lebrondata.csv").then(function(jsonData1){
+  //   d3.json("data/sample1.json").then(function(jsonData2) {
+  //     shotData = jsonData1;
+  //     regionData = jsonData2;
+  //     courtVis();
 
-    })
+  //   })
 
-  });
+  // });
 }
 
 function courtVis() {
@@ -33,7 +41,8 @@ function courtVis() {
     d3.selectAll("svg").remove();
 
     ///Instantiate visualization objects here
-    court = new CourtChart("court-area",shotData,regionData);
+    court = new CourtChart("court-area",shotData);
+
     distanceChart = new DistanceChart("distance-chart-area", shotData);
 
 }

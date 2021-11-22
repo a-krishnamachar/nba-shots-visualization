@@ -27,24 +27,26 @@ DistanceChart.prototype.updateVis = function() {
     console.log(vis.shotData);
 
     vis.shotData.sort(function (a,b) {
-        return parseFloat(b.SHOT_DISTANCE) - parseFloat(a.SHOT_DISTANCE);
+        return parseFloat(b[16]) - parseFloat(a[16]);
     })
-    var maxDistance = parseFloat(vis.shotData[0].SHOT_DISTANCE);
+    console.log("sorted");
+    console.log(vis.shotData);
+    var maxDistance = parseFloat(vis.shotData[0][16]);
     vis.shotData.sort(function (a,b) {
-        return parseFloat(a.SHOT_DISTANCE) - parseFloat(b.SHOT_DISTANCE);
+        return parseFloat(a[16]) - parseFloat(b[16]);
     })
-    var minDistance = parseFloat(vis.shotData[0].SHOT_DISTANCE);
+    var minDistance = parseFloat(vis.shotData[0][16]);
     console.log("max: " + maxDistance + "  min: " + minDistance);
 
     var distanceStatistics = [];
 
     for (var i = minDistance; i <= maxDistance; i++) {
+        console.log(i);
        var filteredShotData = vis.shotData.filter(function(value) {
-           console.log(value.PLAYER_NAME);
-           return (parseFloat(value.SHOT_DISTANCE) == i);
+           return (parseFloat(value[18]) == i);
        }) 
-       var madeShots = d3.sum(filteredShotData, d => d.SHOT_MADE_FLAG);
-       var takenShots = d3.sum(filteredShotData, d => d. SHOT_ATTEMPTED_FLAG);
+       var madeShots = d3.sum(filteredShotData, d => d[20]);
+       var takenShots = d3.sum(filteredShotData, d => d[19]);
        var shootingPercentage = 0;
        if (takenShots != 0) {
            shootingPercentage = madeShots/takenShots;
