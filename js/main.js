@@ -40,6 +40,16 @@ function courtVis() {
     //clear court so there aren't duplicates
     d3.selectAll("svg").remove();
 
+    //create court title + other
+    document.getElementById('courtTitle').innerHTML = "Court Visualization";
+    document.getElementById('courtTooltipClearText').innerHTML = "?";
+    document.getElementById('courtTooltipText').innerHTML = "This chart displays a player's shots." +
+    " Red = scored; black = missed.";
+
+    document.getElementById('lineGraphTitle').innerHTML = "Accuracy (0-1) v. Distance from Hoop (ft)";
+    document.getElementById('lineTooltipClearText').innerHTML = "?";
+    document.getElementById('lineTooltipText').innerHTML = "This chart displays a player's shots." +
+    " Red = scored; black = missed.";
     ///Instantiate visualization objects here
     court = new CourtChart("court-area",shotData);
 
@@ -74,5 +84,11 @@ function searchFunc() {
   }
 
 })
+
+}
+function toolTip() {
+  var element = document.getElementById('chartTitle');
+
+
 
 }

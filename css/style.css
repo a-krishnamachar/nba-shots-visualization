@@ -10,11 +10,54 @@ body {
 
 #playerSearchButton {
   width: 20%;
-  padding: 10px;
+  padding: 12px;
   background: #2196F3;
+	border: 1px solid grey;
   color: white;
-  font-size: 17px;
-  border: 1px solid grey;
-  border-left: none; /* Prevent double borders */
+  font-size: 15px;
+  border-left: none;
+
   cursor: pointer;
+}
+#tooltip {
+	position: relative;
+}
+
+
+#tooltip #courtTooltipText {
+	visibility: hidden;
+  background-color: #555;
+  color: #fff;
+	width: 100px;
+}
+#tooltip #courtTooltipText::after {
+	content: "";
+
+}
+
+#tooltip:hover #courtTooltipText{
+	visibility: visible;
+	opacity: 0.8;
+	transition: 0.3;
+}
+
+
+#tooltip #lineTooltipText {
+	visibility: hidden;
+  background-color: #555;
+  color: #fff;
+	width: 100px;
+}
+#tooltip #lineTooltipText::after {
+	content: "";
+}
+
+#tooltip:hover #lineTooltipText{
+	visibility: visible;
+	opacity: 0.8;
+	transition: 0.3;
+}
+
+#playerHeading {
+	font-size: 18px;
 }
