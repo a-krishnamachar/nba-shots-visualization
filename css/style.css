@@ -1,11 +1,24 @@
 body {
 	font-family: 'Georgia', serif;
   background-color: #dfe1e8;
+
+    opacity: 0;
+    transition: opacity 4s;
 }
 
 #chart-area {
+	transition: opacity 3s;
 
+}
 
+#courtTitle {
+	font-size: 22px;
+}
+
+#introtext {
+	opacity: 0;
+	transition: opacity 6s;
+	opacity: 1;
 }
 
 #playerSearchButton {

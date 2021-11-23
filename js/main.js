@@ -44,9 +44,9 @@ function courtVis() {
     document.getElementById('courtTitle').innerHTML = "Court Shot Distribution + Heatmap";
     document.getElementById('courtTooltipClearText').innerHTML = "?";
     document.getElementById('courtTooltipText').innerHTML = "This chart displays a player's shots." +
-    " Red = scored; black = missed.";
+    " Black = scored; red = missed.";
 
-    document.getElementById('lineGraphTitle').innerHTML = "Accuracy (0-1) v. Distance from Hoop (ft)";
+    document.getElementById('lineGraphTitle').innerHTML = "Accuracy (%) v. Distance from Hoop (ft)";
     document.getElementById('lineTooltipClearText').innerHTML = "?";
     document.getElementById('lineTooltipText').innerHTML = "This chart displays a player's shot accuracy the further they get from the hoop."
     ///Instantiate visualization objects here
@@ -87,7 +87,5 @@ function searchFunc() {
 }
 function toolTip() {
   var element = document.getElementById('chartTitle');
-
-
 
 }

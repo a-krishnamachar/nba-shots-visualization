@@ -6,19 +6,21 @@
         <title>CSE457 Final Project - NBA Shot Accuracy</title>
         <link rel="stylesheet" href="css/style.css">
     </head>
-    <body>
+    <body onload="document.body.style.opacity='1'">
       <a href="processbook.html">Process Book</a>
 
-        <h1>NBA Shot Accuracy by Court Location</h1>
-        <br>
-        <p>Use the following to search for an NBA player + year.</p>
-        <input type="text" id="playerfirstSearch">
-        <input type="text" id="playerlastSearch">
+      <h1><center>NBA Shot Accuracy by Court Location</h1>
+
+      <div id="introtext">
+        <p>Use the following to search for an NBA player.</p>
+        First <input type="text" id="playerfirstSearch">
+        Last <input type="text" id="playerlastSearch">
         <button type="submit" class="playerSearchButton" onclick="searchFunc()">Go!</button>
         <ul id="playerList">
         </ul>
+      </div>
         <br>
-        <h2 id="courtTitle"></h2>
+        <h2 id="courtTitle"><center></h2>
 
         <div id="tooltip">
             <span id="courtTooltipClearText"></span>
