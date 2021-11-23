@@ -23,25 +23,18 @@ DistanceChart.prototype.initVis = function() {
 DistanceChart.prototype.updateVis = function() {
     var vis = this;
 
-    console.log("distance");
-    console.log(vis.shotData);
-
     vis.shotData.sort(function (a,b) {
         return parseFloat(b[16]) - parseFloat(a[16]);
     })
-    console.log("sorted");
-    console.log(vis.shotData);
     var maxDistance = parseFloat(vis.shotData[0][16]);
     vis.shotData.sort(function (a,b) {
         return parseFloat(a[16]) - parseFloat(b[16]);
     })
     var minDistance = parseFloat(vis.shotData[0][16]);
-    console.log("max: " + maxDistance + "  min: " + minDistance);
 
     var distanceStatistics = [];
 
     for (var i = minDistance; i <= maxDistance; i++) {
-        console.log(i);
        var filteredShotData = vis.shotData.filter(function(value) {
            return (parseFloat(value[18]) == i);
        }) 

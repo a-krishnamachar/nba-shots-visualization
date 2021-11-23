@@ -48,11 +48,14 @@ CourtChart.prototype.initVis = function () {
 
 }
 
+function CellStats(width_index, height_index, cell_percentage) {
+  this.width_index = width_index;
+  this.height_index = height_index;
+  this.cell_percentage = cell_percentage;
+}
+
 CourtChart.prototype.updateVis = function () {
   var vis = this;
-
-  //populate data
-  // SHOT POINT DYNAMIC CREATION PLUS PROPER SCALES
 
   let delayRandomizer = d3.scaleLinear()
     .domain([0, 1])
@@ -66,30 +69,90 @@ CourtChart.prototype.updateVis = function () {
     .domain([-70, 440])
     .range([0, vis.height]);
 
-  // var colorScale = d3.scaleLinear()
-  //   .range(["white", "red"])
-  //   .domain([0, 100]);
+  var opacityScale = d3.scaleLinear()
+    .domain([0,1])
+    .range([0.25, 0.75]);
 
-  // var shotHeat = vis.svg.selectAll(".shot-heat")
-  //   .data(vis.shotData);
+  var colorScale = d3.scaleSequential()
+  .interpolator(d3.interpolateRdBu)
+  .domain([1,0]);
 
-  // shotHeat.enter().append("circle")
-  //   .merge(shotHeat)
-  //   .attr("class", "shot-heat")
-  //   .attr("cx", function (d, i) {
-  //     return xLocationScale(parseFloat(d[17]));
-  //   })
-  //   .attr("cy", function (d, i) {
-  //     return vis.height - yLocationScale(parseFloat(d[18]));
-  //   })
-  //   .attr("r", 50)
-  //   .style("fill", function (d, i) {
-  //     if (d[10] == "Missed Shot") { return "white"; }
-  //     else { return "red"; }
-  //   })
-  //   .style("opacity", 0.2);
+  // GRID HEATMAP CREATION
 
-  // shotHeat.exit().remove();
+  console.log("here now");
+  console.log(vis.shotData);
+
+  var cellWidth = vis.width / 20;
+  var cellHeight = vis.height / 20;
+  var maxWidthIndex = 0;
+  var maxHeightIndex = 0;
+  console.log("Cell width: " + cellWidth + " Cell height: " + cellHeight);
+  for (let i = 0; i < vis.shotData.length; i++) {
+    let widthIndex = parseInt(xLocationScale(vis.shotData[i][17]) / cellWidth);
+    if (widthIndex > maxWidthIndex) {
+      maxWidthIndex = widthIndex;
+    }
+    let heightIndex = parseInt(yLocationScale(vis.shotData[i][18]) / cellHeight);
+    if (heightIndex > maxHeightIndex) {
+      maxHeightIndex = heightIndex;
+    }
+    console.log(widthIndex + ", " + heightIndex);
+    vis.shotData[i].width_index = widthIndex;
+    vis.shotData[i].height_index = heightIndex;
+
+  }
+  console.log(vis.shotData);
+  console.log("width in cells: " + maxWidthIndex);
+  console.log("height in cells: " + maxHeightIndex);
+
+  var cellStatistics = [];
+  for (let i = 0; i < maxWidthIndex + 1; i++) {
+    for (let j = 0; j < maxHeightIndex; j++) {
+      var filteredShots = vis.shotData.filter(function (value) {
+        return (value.width_index == i) && (value.height_index == j);
+      })
+      var madeShots = d3.sum(filteredShots, d => d[20]);
+      var totalShots = d3.sum(filteredShots, d => d[19]);
+      var cellPercentage;
+      if (totalShots == 0) {
+        cellPercentage = 0.5;
+      }
+      else {
+        cellPercentage = (madeShots / totalShots).toFixed(3);
+      }
+      var newCell = new CellStats(i, j, parseFloat(cellPercentage));
+      cellStatistics.push(newCell);
+    }
+  }
+  console.log("cell stats");
+  console.log(cellStatistics);
+
+  var heatCell = vis.svg.selectAll(".heat-cell")
+    .data(cellStatistics);
+
+  heatCell.enter().append("rect")
+    .merge(heatCell)
+    .attr("class", "heat-cell")
+    .attr("x", function (d) {
+      return cellWidth * d.width_index;
+    })
+    .attr("y", function (d) {
+      return vis.height - (cellHeight * (d.height_index + 1) - 5);
+    })
+    .attr("width", cellWidth)
+    .attr("height", cellHeight)
+    // .attr("fill", function(d) {
+    //   return colorScale(d.cell_percentage);
+    // })
+    // .style("opacity", 0.4)
+    .attr("fill", "red")
+    .style("opacity", function(d) {
+      return opacityScale(d.cell_percentage);
+    });
+
+  // END HEAT MAP CREATION
+
+  // SHOT POINT DYNAMIC CREATION
 
   var shotPoint = vis.svg.selectAll(".shot-point")
     .data(vis.shotData);
@@ -104,9 +167,10 @@ CourtChart.prototype.updateVis = function () {
       return vis.height - yLocationScale(parseFloat(d[18]));
     })
     .attr("r", 2)
-    .style("fill", function (d, i) {
-      if (d[10] == "Missed Shot") { return "red"; }
-      else { return "black"; }
+    .style("fill", "black")
+    .style("opacity", function (d, i) {
+      if (d[10] == "Missed Shot") { return "0"; }
+      else { return "1"; }
     })
     .attr("visibility", "hidden")
     .on("mouseover", shotMouseOver)
@@ -123,19 +187,17 @@ CourtChart.prototype.updateVis = function () {
 
 
   function shotMouseOver(d, i) {
-    console.log("Here");
-    console.log(i[10]);
-    console.log(i[12]);
-    console.log(i[13]);
-    console.log(i[14])
+    // console.log("Here");
+    // console.log(i[10]);
+    // console.log(i[12]);
+    // console.log(i[13]);
+    // console.log(i[14]);
+    console.log(i[1]);
   }
 
   function shotMouseOut(d) {
 
   }
 
-  // GRID HEATMAP CREATION
-
-  
 
 }

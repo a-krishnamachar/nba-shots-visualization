@@ -17,7 +17,6 @@ function loadData(playerfirstInput, playerlastInput) {
   //manually call player json file from specific year
   //d3.json("data/player_data/" + playerfirstInput + "_" + playerlastInput + ".json").then(function(jsonData1) {
   let fileName = playerfirstInput + "_" + playerlastInput;
-  console.log(fileName);
 
   d3.json("data/player_data/" + fileName + ".json").then(function(jsonData) {
       shotData = jsonData;
@@ -75,7 +74,6 @@ function searchFunc() {
 
   for (var i=0; i<jsonData.length; i++) {
     if (jsonData[i].last_name == (playerlastInput) && (jsonData[i].first_name == (playerfirstInput))) {
-      console.log(jsonData[i].last_name);
       document.getElementById('playerHeading').innerHTML = playerfirstInput + " " + playerlastInput + " | 2021-22";
       loadData(playerfirstInput, playerlastInput);
 
