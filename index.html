@@ -10,18 +10,22 @@
       <script src="https://cdn.jsdelivr.net/npm/d3-color@3"></script>
 <script src="https://cdn.jsdelivr.net/npm/d3-interpolate@3"></script>
 <script src="https://cdn.jsdelivr.net/npm/d3-scale-chromatic@3"></script>
+    <body onload="document.body.style.opacity='1'">
       <a href="processbook.html">Process Book</a>
 
-        <h1>NBA Shot Accuracy by Court Location</h1>
+      <h1><center>NBA Shot Accuracy by Court Location</h1>
+
+      <div id="introtext" onload="this.style.opacity='1'">
         <br>
-        <p>Use the following to search for an NBA player + year.</p>
-        <input type="text" id="playerfirstSearch">
-        <input type="text" id="playerlastSearch">
+        <p><center>Search for an NBA player.</p>
+        First <input type="text" id="playerfirstSearch">
+        Last <input type="text" id="playerlastSearch">
         <button type="submit" class="playerSearchButton" onclick="searchFunc()">Go!</button>
         <ul id="playerList">
         </ul>
+      </div>
         <br>
-        <h2 id="courtTitle"></h2>
+        <h2 id="courtTitle"><center></h2>
 
         <div id="tooltip">
             <span id="courtTooltipClearText"></span>
@@ -46,6 +50,8 @@
         <!-- <script src="https://d3js.org/d3.v6.js"></script> -->
         <!-- <script src="js/d3-scale-chromatic.v0.3.min.js"></script> -->
         <script src="js/d3.min.js"></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.0.1/spin.min.js'></script>
+
 
         <script src="js/court.js"></script>
         <script src="js/distanceChart.js"></script>

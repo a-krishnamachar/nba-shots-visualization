@@ -1,11 +1,24 @@
 body {
 	font-family: 'Georgia', serif;
   background-color: #dfe1e8;
+
+  opacity: 0;
+  transition: opacity 4s;
 }
 
 #chart-area {
+	transition: opacity 3s;
 
+}
 
+#courtTitle {
+	font-size: 22px;
+}
+
+#introtext {
+	opacity: 0;
+	transition: opacity 6s;
+	opacity: 1;
 }
 
 #playerSearchButton {
@@ -26,7 +39,7 @@ body {
 
 #tooltip #courtTooltipText {
 	visibility: hidden;
-	background-color: #850c18;
+	background-color: #0756ab;
   /*background-color: #555;*/
 	color: #d9d0d1;
 	width: 100px;
@@ -48,7 +61,7 @@ body {
 
 #tooltip #lineTooltipText {
 	visibility: hidden;
-	background-color: #850c18;
+	background-color: #0756ab;
   /*background-color: #555;*/
 	color: #d9d0d1;
 	width: 100px;
@@ -65,6 +78,24 @@ body {
 	visibility: visible;
 	opacity: 0.8;
 	transition: 0.3;
+}
+
+#courtTooltipClearText {
+	font-style: italic;
+	background-color: black;
+	color: white;
+	right: 2px;
+	border-radius: 20px;
+	/*padding: 10px;*/
+}
+
+#lineTooltipClearText {
+	font-style: italic;
+	background-color: black;
+	color: white;
+	right: 2px;
+	border-radius: 20px;
+	/*padding: 10px;*/
 }
 
 #playerHeading {
