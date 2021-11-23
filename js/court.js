@@ -18,7 +18,7 @@ CourtChart.prototype.initVis = function () {
     vis.height = 500 - vis.margin.top - vis.margin.bottom;
 
   vis.svg = d3.select("#court-area").append("svg")
-    .attr("viewBox", '0 0 600 600')
+    .attr("viewBox", '0 0 500 500')
     .append("g")
 
   var courtBackgroundURL = "data/nba_court.jpeg";

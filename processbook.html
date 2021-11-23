@@ -16,8 +16,8 @@
         <h3>Overview and Motivation</h3>
         <p>Over the past decade, modern data and analytics has revolutionized how NBA teams strategize and play basketball.
           Every team now has their own analytics departments and every game, cameras track precisely the
-          movement of the ball and players on the court. Teams have used this data to determine the shots
-          with the highest expected value, leading to a dramatic rise in  three-point shots.
+          movement of the ball and players on the court. Teams use this data to determine the shots
+          with the highest expected value, leading to a dramatic rise in  three-point shots in recent years.
           Players now wear health sensors that monitor their fatigue during practice, helping teams know when it
           is best to give a star player rest.
         </p>
@@ -25,13 +25,14 @@
           Teams have always used statistics and data to inform their decision making, however, in the past their data was basic and
           limited to things like shots, assists and rebounds. Now both teams and fans alike have
           access to highly detailed data for every game. However, increasingly detailed tracking leads
-           to the challenge of having to sort through and analyze an ever increasing amount of data.
+           to the challenge of having to sort through and analyze an ever increasing amount of data. This is where our project
+           comes in.
         </p>
         <p>
         </p>
         <h3>Related Work</h3>
         <p>We took inspiration from a few websites + visualizations that we have seen in the "wild".
-          Foremost among these were a) visuals similar to the below images ([1], [2]).
+          Foremost among these were the below images ([1], [2]).
         </p>
         <img src="processbook/proposaldata/statsbomb.png" alt="heatmap" width="450" height="400">
         <img src="processbook/proposaldata/totalpoints.png" alt="totalpoints" width="450" height="400">
@@ -53,24 +54,24 @@
         </p>
         <p>Through this project, we intend to convey information about individual players’ shot accuracy
           from specific parts on the court.
-          The goal of this project is to sift through NBA player data to find meaningful insights
+          The goal of this project is to sift through a complicated mass of NBA player data to find meaningful insights
           and present them in an intuitive, visually appealing implementation.
-
           We hope to also boost enthusiasm of the game for fans and non-fans alike, and increase a
           baseline knowledge of the sport amongst all viewers!
         </p>
         <h3>Data</h3>
         <p>
-          We plan on getting our data from the NBA official website
+          We have gotten our data from the official NBA website
           (https://www.nba.com/stats/) which contains detailed statistics from every NBA game
            played dating back over twenty years. By using data supplied by the league itself,
-           we can trust that the information is accurate and trustworthy.
+           we can trust that the information is as accurate and trustworthy as possible.
         </p>
-        <p>We expect to do some data cleanup as we will likely encounter more data than we
-          actually need for the scope of this project, however, we expect the data itself to be
-          easy to work with and won’t require much post processing. This is because the data we are
-          interested in are mostly statistics from NBA games which have been checked many times prior
-           to viewing them which makes any mistakes extremely unlikely.
+        <p>We have done a good amount of data cleanup as we have encountered, in the initial phase, far more data than we
+          actually need for the scope of this project. The data itself was relatively
+          easy to work with and did not require much post processing -- the difficulty lay in aggregating the pertinent information
+          and getting the API to work locally; and later, downloading the correct datasets to our server.
+          The data we are interested in are mostly statistics from NBA games -- these have been checked many times prior
+           to viewing them which makes any mistakes unlikely.
         </p>
 
         <p>
@@ -79,21 +80,28 @@
       This is an API client for www.nba.com that makes the API endpoints on the websites easier to
       access and helped make the process of data gathering more efficient.
       Once we had understood the scale of the data to the full extent,
-        we then moved to integrating the call to the API directly into our javascript code.
+        we then moved to integrating the call to the API directly into our javascript code. This was a slight a topic of concern,
+        as the API proved to be quite difficult to deal with (it is an open-source tool, and there have been some problems with the code
+         on that end). We resolved this situation by downloading data locally, with the hope that if there is a resolution
+        on the API side, we will be ready to adapt our implementation.
       </p>
 
         <h3>Exploratory Data Analysis (EDA)</h3>
 
-        <p>We initally utilized the python dataframe tool to inspect and understand our data.
-          This was the quickest and most efficient way to rapidly iterate through the thousands of
-          data points that we needed to analyze (hundreds of individual player shots; that then needed to
+        <p>We initally utilized python to inspect and understand our data. Once we were eventually able to get the data locally,
+          we first pulled a sample dataset into a csv to understand it better, visualizing a few graphs in Excel. Then, once we had
+            a good understanding of things, we wrote a python script to pull the player data into separate .jsons for greater ease of use.
+          </head>
+          <br>
+          Using python to pull the information into a json
+          proved to be the quickest and most efficient way to rapidly iterate (and download) through the hundreds of thousands of
+          data points that we needed to analyze (thousands of individual player shots that then needed to
           be aggregated into one holistic value for the chart displays).
         </p>
         <p>
-          The main goal of this visualization was to portray a specific player’s shooting percentage in different court locations.
-          We also included league average (%s) of shots taken from those court locations.
-          We will necessarily need to include those data points across an entire season for any
-          player with, for example, more than 20 games played (20 arbitrarily chosen, number might change).
+          The main goal of this visualization was to portray a specific player’s shooting percentage in different locations on the court.
+          We also **pending** incorporate league average (%s) of shots taken from those court locations.
+          We have included shot data points across an entire season for any given player.
         </p>
 
         <h3>Design Evolution</h3>
@@ -120,16 +128,14 @@
           for the main visualization. The intent of this visualization is for a user to be able to quickly determine how accurate
           player X is from a specific section of the basketball court.
           <br>
-          Users hovering over different portions of court will display shot
+          *pending* Users hovering over different portions of court will display shot
             accuracy on popup (tooltip). <br>
-            (Secondary display) - A separate bar chart populates showing the selected player’s shot % compared to the
-            league average for each part of the court.
+            (Secondary display) - A separate bar chart populates showing the selected player's accuracy as a function of distance from the hoop.
         </p>
         <p>Users are able to "kickstart" the visualization by
           searching for players by name at the top of the page. The intent here is for a user to
           identify a specific player and then rapidly get the relevant information about that player.
-          <br>
-          For example, a user could select Chris Paul. The visualization will populate his
+          For example, a user could search for Chris Paul. The visualization will populate his
           average scoring accuracy + information.
         </p>
 
@@ -145,7 +151,7 @@
           combine a few of the data features to get the information we wanted (X,Y locations; shot zone areas; etc).
           There was no single "silver bullet"; rather we had to leverage these different features of the dataset to get to our desired outcome.
           For example, our shot charts eventually included discrete data points (represented as circles) as well as 'areas' of the court where
-          the accuracy was displayed in a different popup. So leveraging 
+          the accuracy was displayed in a different popup. 
         </p>
         <p>
 

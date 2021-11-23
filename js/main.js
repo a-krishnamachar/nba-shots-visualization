@@ -42,8 +42,8 @@ function courtVis() {
     //create court title + other
     document.getElementById('courtTitle').innerHTML = "Court Shot Distribution + Heatmap";
     document.getElementById('courtTooltipClearText').innerHTML = " i ";
-    document.getElementById('courtTooltipText').innerHTML = "This chart displays a player's shots." +
-    " Black = scored; red = missed.";
+    document.getElementById('courtTooltipText').innerHTML = "This chart displays a player's shots. Each dot is a made shot. " +
+    "The darker squares represent higher accuracy zones, and the lighter ones lower accuracy.";
 
     document.getElementById('lineGraphTitle').innerHTML = "Accuracy (%) v. Distance from Hoop (ft)";
     document.getElementById('lineTooltipClearText').innerHTML = " i ";
