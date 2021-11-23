@@ -11,8 +11,9 @@
 
       <h1><center>NBA Shot Accuracy by Court Location</h1>
 
-      <div id="introtext">
-        <p>Use the following to search for an NBA player.</p>
+      <div id="introtext" onload="this.style.opacity='1'">
+        <br>
+        <p><center>Search for an NBA player.</p>
         First <input type="text" id="playerfirstSearch">
         Last <input type="text" id="playerlastSearch">
         <button type="submit" class="playerSearchButton" onclick="searchFunc()">Go!</button>
@@ -44,6 +45,8 @@
 
         <!-- <script src="https://d3js.org/d3.v6.js"></script> -->
         <script src="js/d3.min.js"></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.0.1/spin.min.js'></script>
+
 
         <script src="js/court.js"></script>
         <script src="js/distanceChart.js"></script>

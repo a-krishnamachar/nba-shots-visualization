@@ -42,12 +42,12 @@ function courtVis() {
 
     //create court title + other
     document.getElementById('courtTitle').innerHTML = "Court Shot Distribution + Heatmap";
-    document.getElementById('courtTooltipClearText').innerHTML = "?";
+    document.getElementById('courtTooltipClearText').innerHTML = " i ";
     document.getElementById('courtTooltipText').innerHTML = "This chart displays a player's shots." +
     " Black = scored; red = missed.";
 
     document.getElementById('lineGraphTitle').innerHTML = "Accuracy (%) v. Distance from Hoop (ft)";
-    document.getElementById('lineTooltipClearText').innerHTML = "?";
+    document.getElementById('lineTooltipClearText').innerHTML = " i ";
     document.getElementById('lineTooltipText').innerHTML = "This chart displays a player's shot accuracy the further they get from the hoop."
     ///Instantiate visualization objects here
     court = new CourtChart("court-area",shotData);
