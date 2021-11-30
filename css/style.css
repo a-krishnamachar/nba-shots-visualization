@@ -102,3 +102,32 @@ body {
 	margin-left: 300px;
 	font-size: 18px;
 }
+
+#tooltip #pieTooltipText {
+	visibility: hidden;
+	background-color: #0756ab;
+  /*background-color: #555;*/
+	color: #d9d0d1;
+	width: 100px;
+	border-radius: 6px;
+
+}
+#tooltip #pieTooltipText::after {
+	content: "";
+	border-width: 6px;
+
+}
+
+#tooltip:hover #pieTooltipText{
+	visibility: visible;
+	opacity: 0.8;
+	transition: 0.3;
+}
+#pieTooltipClearText {
+	font-style: italic;
+	background-color: black;
+	color: white;
+	right: 2px;
+	border-radius: 20px;
+	/*padding: 10px;*/
+}

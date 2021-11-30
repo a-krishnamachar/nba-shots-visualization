@@ -42,16 +42,24 @@ function courtVis() {
     //create court title + other
     document.getElementById('courtTitle').innerHTML = "Court Shot Distribution + Heatmap";
     document.getElementById('courtTooltipClearText').innerHTML = " i ";
-    document.getElementById('courtTooltipText').innerHTML = "This chart displays a player's shots. Each dot is a made shot. " +
-    "The darker squares represent higher accuracy zones, and the lighter ones lower accuracy.";
+    // document.getElementById('courtTooltipText').innerHTML = "This chart displays a player's shots. Each dot is a made shot. " +
+    // "The darker squares represent higher accuracy zones, and the lighter ones lower accuracy.";
+    document.getElementById('courtTooltipText').innerHTML = "This chart displays a player's shots. Each dot is a made shot and each red dot is a missed shot.";
 
     document.getElementById('lineGraphTitle').innerHTML = "Accuracy (%) v. Distance from Hoop (ft)";
     document.getElementById('lineTooltipClearText').innerHTML = " i ";
     document.getElementById('lineTooltipText').innerHTML = "This chart displays a player's shot accuracy the further they get from the hoop."
+
+    document.getElementById('pieChartTitle').innerHTML = "Field Goal Percentage from 2-Point and 3-Point Range";
+    document.getElementById('pieTooltipClearText').innerHTML = " i ";
+    document.getElementById('pieTooltipText').innerHTML = "These pie charts represent the differences in 2-pointers and 3-pointers taken." +
+    "The blue slices represent the portion of shots made and the red slices the portion of shots missed.";
     ///Instantiate visualization objects here
     court = new CourtChart("court-area",shotData);
 
     distanceChart = new DistanceChart("distance-chart-area", shotData);
+
+    shotPieChart = new ShotPieChart("shot-pie-chart-area", shotData);
 
 }
 
