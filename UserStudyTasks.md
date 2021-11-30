@@ -4,3 +4,4 @@ Tasks for User Study
 3. Did Stephen Curry attempt more 2-point field goals or 3-point goals?
 4. How do you interpret the Accuracy v. Distance from Hoop graph?
 5. What was Kevin Durant's field goal percentage for 2-pointers? What about for 3-pointers?
+6. Based on the Accuracy v. Distance chart, what range from the hoop is Giannis Antetokounmpo most efficient?
