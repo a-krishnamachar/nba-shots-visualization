@@ -131,3 +131,28 @@ body {
 	border-radius: 20px;
 	/*padding: 10px;*/
 }
+
+#playerList {
+    padding-inline-start: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-gap: 20px;
+}
+
+.player {
+    list-style-type: none;
+    background-color: #eaeaea;
+    border-radius: 3px;
+    /* padding: 10px 20px; */
+    display: grid;
+    text-align: center;
+}
+
+#searchBar {
+    width: 50%;
+    height: 32px;
+    border-radius: 3px;
+    border: 1px solid #eaeaea;
+    padding: 5px 10px;
+    font-size: 12px;
+}
