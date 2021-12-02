@@ -82,80 +82,80 @@ CourtChart.prototype.updateVis = function () {
   .interpolator(d3.interpolateRdBu)
   .domain([1,0]);
 
-  // // GRID HEATMAP CREATION
+  // GRID HEATMAP CREATION
 
-  // console.log("here now");
-  // console.log(vis.shotData);
+  console.log("here now");
+  console.log(vis.shotData);
 
-  // var cellWidth = vis.width / 20;
-  // var cellHeight = vis.height / 20;
-  // var maxWidthIndex = 0;
-  // var maxHeightIndex = 0;
-  // console.log("Cell width: " + cellWidth + " Cell height: " + cellHeight);
-  // for (let i = 0; i < vis.shotData.length; i++) {
-  //   let widthIndex = parseInt(xLocationScale(vis.shotData[i][17]) / cellWidth);
-  //   if (widthIndex > maxWidthIndex) {
-  //     maxWidthIndex = widthIndex;
-  //   }
-  //   let heightIndex = parseInt(yLocationScale(vis.shotData[i][18]) / cellHeight);
-  //   if (heightIndex > maxHeightIndex) {
-  //     maxHeightIndex = heightIndex;
-  //   }
-  //   console.log(widthIndex + ", " + heightIndex);
-  //   vis.shotData[i].width_index = widthIndex;
-  //   vis.shotData[i].height_index = heightIndex;
+  var cellWidth = vis.width / 20;
+  var cellHeight = vis.height / 20;
+  var maxWidthIndex = 0;
+  var maxHeightIndex = 0;
+  console.log("Cell width: " + cellWidth + " Cell height: " + cellHeight);
+  for (let i = 0; i < vis.shotData.length; i++) {
+    let widthIndex = parseInt(xLocationScale(vis.shotData[i][17]) / cellWidth);
+    if (widthIndex > maxWidthIndex) {
+      maxWidthIndex = widthIndex;
+    }
+    let heightIndex = parseInt(yLocationScale(vis.shotData[i][18]) / cellHeight);
+    if (heightIndex > maxHeightIndex) {
+      maxHeightIndex = heightIndex;
+    }
+    console.log(widthIndex + ", " + heightIndex);
+    vis.shotData[i].width_index = widthIndex;
+    vis.shotData[i].height_index = heightIndex;
 
-  // }
-  // console.log(vis.shotData);
-  // console.log("width in cells: " + maxWidthIndex);
-  // console.log("height in cells: " + maxHeightIndex);
+  }
+  console.log(vis.shotData);
+  console.log("width in cells: " + maxWidthIndex);
+  console.log("height in cells: " + maxHeightIndex);
 
-  // var cellStatistics = [];
-  // for (let i = 0; i < maxWidthIndex + 1; i++) {
-  //   for (let j = 0; j < maxHeightIndex; j++) {
-  //     var filteredShots = vis.shotData.filter(function (value) {
-  //       return (value.width_index == i) && (value.height_index == j);
-  //     })
-  //     var madeShots = d3.sum(filteredShots, d => d[20]);
-  //     var totalShots = d3.sum(filteredShots, d => d[19]);
-  //     var cellPercentage;
-  //     if (totalShots == 0) {
-  //       cellPercentage = 0.5;
-  //     }
-  //     else {
-  //       cellPercentage = (madeShots / totalShots).toFixed(3);
-  //     }
-  //     var newCell = new CellStats(i, j, parseFloat(cellPercentage));
-  //     cellStatistics.push(newCell);
-  //   }
-  // }
-  // console.log("cell stats");
-  // console.log(cellStatistics);
+  var cellStatistics = [];
+  for (let i = 0; i < maxWidthIndex + 1; i++) {
+    for (let j = 0; j < maxHeightIndex; j++) {
+      var filteredShots = vis.shotData.filter(function (value) {
+        return (value.width_index == i) && (value.height_index == j);
+      })
+      var madeShots = d3.sum(filteredShots, d => d[20]);
+      var totalShots = d3.sum(filteredShots, d => d[19]);
+      var cellPercentage;
+      if (totalShots == 0) {
+        cellPercentage = 0.5;
+      }
+      else {
+        cellPercentage = (madeShots / totalShots).toFixed(3);
+      }
+      var newCell = new CellStats(i, j, parseFloat(cellPercentage));
+      cellStatistics.push(newCell);
+    }
+  }
+  console.log("cell stats");
+  console.log(cellStatistics);
 
-  // var heatCell = vis.svg.selectAll(".heat-cell")
-  //   .data(cellStatistics);
+  var heatCell = vis.svg.selectAll(".heat-cell")
+    .data(cellStatistics);
 
-  // heatCell.enter().append("rect")
-  //   .merge(heatCell)
-  //   .attr("class", "heat-cell")
-  //   .attr("x", function (d) {
-  //     return cellWidth * d.width_index;
-  //   })
-  //   .attr("y", function (d) {
-  //     return vis.height - (cellHeight * (d.height_index + 1) - 5);
-  //   })
-  //   .attr("width", cellWidth)
-  //   .attr("height", cellHeight)
-  //   // .attr("fill", function(d) {
-  //   //   return colorScale(d.cell_percentage);
-  //   // })
-  //   // .style("opacity", 0.4)
-  //   .attr("fill", "red")
-  //   .style("opacity", function(d) {
-  //     return opacityScale(d.cell_percentage);
-  //   });
+  heatCell.enter().append("rect")
+    .merge(heatCell)
+    .attr("class", "heat-cell")
+    .attr("x", function (d) {
+      return cellWidth * d.width_index;
+    })
+    .attr("y", function (d) {
+      return vis.height - (cellHeight * (d.height_index + 1) - 5);
+    })
+    .attr("width", cellWidth)
+    .attr("height", cellHeight)
+    // .attr("fill", function(d) {
+    //   return colorScale(d.cell_percentage);
+    // })
+    // .style("opacity", 0.4)
+    .attr("fill", "red")
+    .style("opacity", function(d) {
+      return opacityScale(d.cell_percentage);
+    });
 
-  // // END HEAT MAP CREATION
+  // END HEAT MAP CREATION
 
   // SHOT POINT DYNAMIC CREATION
 
