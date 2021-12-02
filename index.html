@@ -18,11 +18,20 @@
       <div id="introtext" onload="this.style.opacity='1'">
         <br>
         <p><center>Search for an NBA player.</p>
-        First <input type="text" id="playerfirstSearch">
+          <div id="searchWrapper">
+            <input
+                type="text"
+                name="searchBar"
+                id="searchBar"
+                placeholder="search for a player"
+            />
+        </div>
+        <ul id="playerList"></ul>
+
+        <!-- First <input type="text" id="playerfirstSearch">
         Last <input type="text" id="playerlastSearch">
         <button type="submit" class="playerSearchButton" onclick="searchFunc()">Go!</button>
-        <ul id="playerList">
-        </ul>
+         -->
       </div>
         <br>
         <h2 id="courtTitle"><center></h2>
@@ -64,6 +73,7 @@
         <script src="js/jquery.min.js"></script>
       	<script src="js/popper.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="data/playerdata1.json"></script>
 
         <script src="js/main.js"></script>
     </body>
