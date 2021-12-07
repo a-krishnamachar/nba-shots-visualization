@@ -34,29 +34,54 @@
          -->
       </div>
         <br>
-        <h2 id="courtTitle"><center></h2>
 
+          <!-- COMMENTED OUT TOOLTIPS
         <div id="tooltip">
             <span id="courtTooltipClearText"></span>
             <span id="courtTooltipText"></span>
-        </div>
+        </div> -->
 
         <h4 id="playerHeading"></h4>
-        <div id="court-area"></div>
+      <div id="overall-court-area" class="float-container">
+        <div id="court-area" class="float-child">
+          <h2 id="courtTitle"></h2>
+          <span id="courtLegend"></span>
+        </div>
 
-        <h2 id="lineGraphTitle"></h2>
-        <div id="tooltip">
-            <span id="lineTooltipClearText"></span>
-            <span id="lineTooltipText"></span>
+        <div id="side-chart-area" class="float-child">
+          <h2 id="lineGraphTitle"></h2>
+
+          <div id="distance-chart-total">
+            <span id="distanceLegend"></span>
+              <!-- COMMENTED OUT TOOLTIPS
+            <div id="tooltip">
+              <span id="lineTooltipClearText"></span>
+              <span id="lineTooltipText"></span>
+            </div> -->
+          <div id="distance-chart-area"></div>
         </div>
+          <div id="pie-chart-total">
+            <h2 id="pieChartTitle"></h2>
+            <!-- COMMENTED OUT TOOLTIPS
+            <div id="tooltip">
+              <span id="pieTooltipClearText"></span>
+              <span id="pieTooltipText"></span>
+            </div> -->
+            <div id="shot-pie-chart-area"></div>
+          </div>
+          <!--end pie graph div-->
+
+        </div>
+        <!--end side area div-->
+
+      </div>
+      <!--end courtarea div-->
+
+
+
+
         <br>
-        <div id="distance-chart-area"></div>
-        <h2 id="pieChartTitle"></h2>
-        <div id="tooltip">
-            <span id="pieTooltipClearText"></span>
-            <span id="pieTooltipText"></span>
-        </div>
-        <div id="shot-pie-chart-area"></div>
+
         <br><br>
 
 

@@ -10,6 +10,18 @@ body {
 	transition: opacity 3s;
 
 }
+#overall-chart-area {
+}
+
+.float-container {
+
+}
+.float-child {
+	width: 45%;
+	float: left;
+	padding: 20px;
+}
+
 
 #courtTitle {
 	font-size: 22px;
@@ -99,7 +111,7 @@ body {
 }
 
 #playerHeading {
-	margin-left: 300px;
+	text-align: center;
 	font-size: 18px;
 }
 

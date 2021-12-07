@@ -14,11 +14,14 @@ CourtChart.prototype.initVis = function () {
 
   vis.margin = { top: 50, right: 20, bottom: 50, left: 20 };
 
-  vis.width = 440 - vis.margin.left - vis.margin.right,
-    vis.height = 500 - vis.margin.top - vis.margin.bottom;
+  vis.width = widthCourt - vis.margin.left - vis.margin.right,
+    vis.height = heightCourt - vis.margin.top - vis.margin.bottom;
 
   vis.svg = d3.select("#court-area").append("svg")
     .attr("viewBox", '0 0 500 500')
+    // .attr("width", "50%")
+    //.attr("width", widthCourt)
+    //.attr("height", heightCourt)
     .append("g")
 
   var courtBackgroundURL = "data/nba_court.jpeg";

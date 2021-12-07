@@ -8,8 +8,8 @@ ShotPieChart.prototype.initVis = function () {
     var vis = this;
 
     vis.margin = 20;
-    vis.width = 400;
-    vis.height = 400;
+    vis.width = 300;
+    vis.height = 300;
 
     vis.svg = d3.select("#shot-pie-chart-area").append("svg")
         .attr("width", vis.width)

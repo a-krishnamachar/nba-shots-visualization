@@ -12,11 +12,12 @@ DistanceChart.prototype.initVis = function() {
     vis.height = 300 - vis.margin.top - vis.margin.bottom;
 
     vis.svg = d3.select("#distance-chart-area").append("svg")
+    // vis.svg = d3.select("#chart-area").append("svg")
             .attr("width", vis.width + vis.margin.left + vis.margin.right)
             .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
         .append("g")
             .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
-
+    console.log("im' here!!!");
     this.updateVis();
 }
 
@@ -37,7 +38,7 @@ DistanceChart.prototype.updateVis = function() {
     for (var i = minDistance; i <= maxDistance; i++) {
        var filteredShotData = vis.shotData.filter(function(value) {
            return (parseFloat(value[18]) == i);
-       }) 
+       })
        var madeShots = d3.sum(filteredShotData, d => d[20]);
        var takenShots = d3.sum(filteredShotData, d => d[19]);
        var shootingPercentage = 0;
@@ -87,5 +88,5 @@ DistanceChart.prototype.updateVis = function() {
         .attr("d", d3.line()
             .x(function(d) { return xScale(d.distance);})
             .y(function(d) { return yScale(d.percentage); })
-            );    
+            );
 }

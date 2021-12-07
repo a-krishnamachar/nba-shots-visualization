@@ -1,7 +1,7 @@
 var courtSvg;
 
-var widthCourt = 400;
-var heightCourt = 400;
+var widthCourt = 500;
+var heightCourt = 500;
 var court;
 
 allData = [];
@@ -10,7 +10,7 @@ var playerArray = ["LeBron James", "Kyrie Irving", "Stephen Curry", "Kevin Duran
 
 
 $.getJSON("data/playerdata1.json", function (jsonData) {
-  
+
   console.log(jsonData)
 
   // const filtered = jsonData.filter(function(player){
@@ -19,7 +19,7 @@ $.getJSON("data/playerdata1.json", function (jsonData) {
   // console.log(filtered)
   const searchBar = document.getElementById('searchBar');
 
-  
+
   searchBar.addEventListener('keyup', (e) => {
     console.log(e.target.value)
     const searchString = e.target.value;
@@ -32,7 +32,7 @@ $.getJSON("data/playerdata1.json", function (jsonData) {
       );
     });
     console.log(filteredPlayers);
-   
+
     const playersSlice = filteredPlayers.slice(0, 12);
 
     displayResults(playersSlice);
@@ -75,7 +75,7 @@ function loadData(playerfirstInput, playerlastInput) {
   //manually call player json file from specific year
   //d3.json("data/player_data/" + playerfirstInput + "_" + playerlastInput + ".json").then(function(jsonData1) {
   let fileName = playerfirstInput + "_" + playerlastInput;
-  document.getElementById('playerHeading').innerHTML = playerfirstInput + " " + playerlastInput + " | 2021-22";
+  document.getElementById('playerHeading').innerHTML = playerfirstInput + " " + playerlastInput + " | 2020-21";
 
   d3.json("data/player_data/" + fileName + ".json").then(function (jsonData) {
     shotData = jsonData;
@@ -100,19 +100,25 @@ function courtVis() {
 
   //create court title + other
   document.getElementById('courtTitle').innerHTML = "Court Shot Distribution + Heatmap";
-  document.getElementById('courtTooltipClearText').innerHTML = " i ";
+  // document.getElementById('courtTooltipClearText').innerHTML = " i ";
+  // document.getElementById('courtTooltipClearText').innerHTML = " i ";
+  document.getElementById('courtLegend').innerHTML = "This chart displays a player's shot map. Each black dot is a made shot; and each red dot is a missed shot.";
+  document.getElementById('distanceLegend').innerHTML = "This chart displays a player's shot accuracy the further they get from the hoop.";
+
   // document.getElementById('courtTooltipText').innerHTML = "This chart displays a player's shots. Each dot is a made shot. " +
   // "The darker squares represent higher accuracy zones, and the lighter ones lower accuracy.";
-  document.getElementById('courtTooltipText').innerHTML = "This chart displays a player's shots. Each dot is a made shot and each red dot is a missed shot.";
+  // document.getElementById('courtTooltipText').innerHTML = "This chart displays a player's shots. Each dot is a made shot and each red dot is a missed shot.";
 
   document.getElementById('lineGraphTitle').innerHTML = "Accuracy (%) v. Distance from Hoop (ft)";
-  document.getElementById('lineTooltipClearText').innerHTML = " i ";
-  document.getElementById('lineTooltipText').innerHTML = "This chart displays a player's shot accuracy the further they get from the hoop."
+  // document.getElementById('lineTooltipClearText').innerHTML = " i ";
+  // document.getElementById('lineTooltipText').innerHTML = "This chart displays a player's shot accuracy the further they get from the hoop."
 
   document.getElementById('pieChartTitle').innerHTML = "Field Goal Percentage from 2-Point and 3-Point Range";
-  document.getElementById('pieTooltipClearText').innerHTML = " i ";
-  document.getElementById('pieTooltipText').innerHTML = "These pie charts represent the differences in 2-pointers and 3-pointers taken." +
-    "The blue slices represent the portion of shots made and the red slices the portion of shots missed.";
+  // document.getElementById('pieTooltipClearText').innerHTML = " i ";
+  // document.getElementById('pieTooltipText').innerHTML = "These pie charts represent the differences in 2-pointers and 3-pointers taken." +
+  //   "The blue slices represent the portion of shots made and the red slices the portion of shots missed.";
+
+
   ///Instantiate visualization objects here
   court = new CourtChart("court-area", shotData);
 
