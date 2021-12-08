@@ -66,7 +66,7 @@ var search = function(player) {
   }
 
   loadData(player.id, player.innerHTML)
-  player.style.backgroundColor = "yellow";
+  player.style.backgroundColor = "#eb3bb9";
 };
 
 
@@ -92,6 +92,9 @@ function courtVis() {
 
   //clear court so there aren't duplicates
   d3.selectAll("svg").remove();
+  d3.selectAll("select").remove();
+  d3.selectAll("input").remove();
+
 
   //create court title + other
   document.getElementById('courtTitle').innerHTML = "Court Shot Distribution + Heatmap";
@@ -123,39 +126,7 @@ function courtVis() {
 
 }
 
-// function searchFunc() {
-//   //player names array load from json
-//   d3.json("data/playerdata1.json").then(function (jsonData) {
-//     //console.log(jsonData);
 
-//     var listElements = document.getElementById('playerList');
-
-//     var li;
-//     var ul;
-//     playerVal = document.getElementById('playerHeading').innerHTML;
-//     playerfirstInput = document.getElementById('playerfirstSearch').value;
-//     playerlastInput = document.getElementById('playerlastSearch').value;
-
-
-
-
-
-
-//     var node = document.createElement("li");
-//     var textNode = document.createTextNode(playerfirstInput + " " + playerlastInput);
-//     node.appendChild(textNode);
-
-//     for (var i = 0; i < jsonData.length; i++) {
-//       if (jsonData[i].last_name == (playerlastInput) && (jsonData[i].first_name == (playerfirstInput))) {
-//         document.getElementById('playerHeading').innerHTML = playerfirstInput + " " + playerlastInput + " | 2021-22";
-//         loadData(playerfirstInput, playerlastInput);
-
-//       }
-//     }
-
-//   })
-
-// }
 function toolTip() {
   var element = document.getElementById('chartTitle');
 

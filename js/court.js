@@ -6,6 +6,7 @@ function CourtChart(_parentElement, _data) {
 
 
   this.initVis();
+
 }
 
 
