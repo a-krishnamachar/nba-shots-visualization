@@ -88,13 +88,17 @@ function loadPlayerCard(playerId, playerName) {
   let fileName = playerId;
   d3.json("data/player_background/" + fileName + ".json").then(function (backgroundData) {
     playerInfoData = backgroundData;
-    console.log(playerInfoData);
+    console.log(playerInfoData.resultSets[1]);
+
+    var ul = document.getElementById('playerCard');
+    var li = document.createElement("li");
+    li.appendChild(document.createTextNode("help"));
+    ul.appendChild(li);
+
+    document.getElementById("playerCard").style.opacity = 0;
 
 
-    //document.getElementById('playerCard').innerHTML = "Player Information"
-     document.getElementById('playerCard').innerHTML = " Player Information ";
-    // document.getElementById('lineTooltipText').innerHTML = "This chart displays a player's shot accuracy the further they get from the hoop."
-
+    //  document.getElementById('playerCardInfo').innerHTML = " Player asfa ";
 
   })
 }
@@ -104,11 +108,13 @@ function courtVis() {
   //clear court so there aren't duplicates
   d3.selectAll("svg").remove();
   d3.selectAll("select").remove();
-  d3.selectAll("input").attr("type", "checkbox").remove();
+  d3.selectAll("#heatmap-checkbox").remove();
+  // d3.selectAll("input").attr("type", "checkbox").remove();
 
 
   //create all graph titles
   document.getElementById('courtTitle').innerHTML = "Court Shot Distribution + Heatmap";
+  document.getElementById('playerCard').innerHTML = " Player Information ";
 
   document.getElementById('courtLegend').innerHTML = "This chart displays a player's shot map. Each black dot is a made shot; and each red dot is a missed shot.";
   document.getElementById('distanceLegend').innerHTML = "This chart displays a player's shot accuracy the further they get from the hoop.";
@@ -135,5 +141,14 @@ function courtVis() {
 
 function toolTip() {
   var element = document.getElementById('chartTitle');
+
+}
+function mouseover() {
+  document.getElementById("playerCard").style.opacity = 1;
+  document.getElementById("playerHeading").style.color = "#0756ab";
+}
+function mouseout() {
+  document.getElementById("playerCard").style.opacity = 0;
+  document.getElementById("playerHeading").style.color = "black";
 
 }

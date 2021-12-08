@@ -45,10 +45,11 @@ body {
 #playerCard {
 	text-align: center;
 }
-/*#playerCardInfo {
+/*#playerCard {
 	opacity: 0;
-}
-#playerCardInfo:hover {
+}*/
+/*#playerCard:hover {
+	border: 5px solid black;
 	opacity: 1;
 }*/
 
