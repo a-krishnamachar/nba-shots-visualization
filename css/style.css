@@ -11,6 +11,19 @@ body {
 
 }
 
+#overall-chart-area {
+}
+
+.float-container {
+
+}
+.float-child {
+	width: 45%;
+	float: left;
+	padding: 20px;
+}
+
+
 #courtTitle {
 	font-size: 22px;
 }
@@ -25,7 +38,7 @@ body {
   width: 20%;
   padding: 12px;
   background: #2196F3;
-	border: 1px solid grey;
+  border: 1px solid grey;
   color: white;
   font-size: 15px;
   border-left: none;
@@ -99,7 +112,7 @@ body {
 }
 
 #playerHeading {
-	margin-left: 300px;
+	text-align: center;
 	font-size: 18px;
 }
 
