@@ -88,13 +88,17 @@ function loadPlayerCard(playerId, playerName) {
   let fileName = playerId;
   d3.json("data/player_background/" + fileName + ".json").then(function (backgroundData) {
     playerInfoData = backgroundData;
-    console.log(playerInfoData.resultSets[1]);
+    var infodata = playerInfoData.resultSets[1];
+    console.log(infodata);
+    console.log(infodata.headers[1]);
+    console.log(infodata.rowSet[0][1]);
 
     var ul = document.getElementById('playerCard');
-    var li = document.createElement("li");
-    li.appendChild(document.createTextNode("help"));
-    ul.appendChild(li);
-
+    for (var i=3; i<7; i++) {
+      var li = document.createElement("li");
+      li.appendChild(document.createTextNode(infodata.headers[i] + ": " + infodata.rowSet[0][i]));
+      ul.appendChild(li);
+    }
     document.getElementById("playerCard").style.opacity = 0;
 
 
@@ -114,7 +118,7 @@ function courtVis() {
 
   //create all graph titles
   document.getElementById('courtTitle').innerHTML = "Court Shot Distribution + Heatmap";
-  document.getElementById('playerCard').innerHTML = " Player Information ";
+  document.getElementById('playerCard').innerHTML = " Player Stats (per game) ";
 
   document.getElementById('courtLegend').innerHTML = "This chart displays a player's shot map. Each black dot is a made shot; and each red dot is a missed shot.";
   document.getElementById('distanceLegend').innerHTML = "This chart displays a player's shot accuracy the further they get from the hoop.";
