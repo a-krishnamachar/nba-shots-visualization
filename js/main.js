@@ -88,17 +88,28 @@ function loadPlayerCard(playerId, playerName) {
   let fileName = playerId;
   d3.json("data/player_background/" + fileName + ".json").then(function (backgroundData) {
     playerInfoData = backgroundData;
-    var infodata = playerInfoData.resultSets[1];
-    console.log(infodata);
-    console.log(infodata.headers[1]);
-    console.log(infodata.rowSet[0][1]);
+    var infodata = playerInfoData.resultSets;
+    console.log(playerInfoData.resultSets);
+    // console.log(infodata);
+    // console.log(infodata.headers[1]);
+    // console.log(infodata.rowSet[0][1]);
+    ///infodata.headers[0].
+
+    //infodata.headers[0] information
+    const arrayslots = [11, 12, 14, 19];
 
     var ul = document.getElementById('playerCard');
     for (var i=3; i<7; i++) {
       var li = document.createElement("li");
-      li.appendChild(document.createTextNode(infodata.headers[i] + ": " + infodata.rowSet[0][i]));
+      li.appendChild(document.createTextNode(infodata[1].headers[i] + ": " + infodata[1].rowSet[0][i]));
       ul.appendChild(li);
     }
+    for (var j in arrayslots) {
+      var li = document.createElement("li");
+      li.appendChild(document.createTextNode(infodata[0].headers[arrayslots[j]] + ": " + infodata[0].rowSet[0][arrayslots[j]]));
+      ul.appendChild(li);
+    }
+
     document.getElementById("playerCard").style.opacity = 0;
 
 
