@@ -69,31 +69,31 @@ CourtChart.prototype.updateVis = function () {
 
   // // FOR TOGGLING - WAIT UNTIL SEARCH IS CORRECTLY SET UP
 
-  // var select = d3.select('#select-area').append('select')
-  //   .attr('class', 'shot-select')
-  //   .on('change', onChange);
+  var select = d3.select('#select-area').append('select')
+    .attr('class', 'shot-select')
+    .on('change', onChange);
 
-  // var options = select.selectAll('option')
-  //   .data(shot_types).enter()
-  //   .append('option')
-  //   .text(function(d) { return d; });
+  var options = select.selectAll('option')
+    .data(shot_types).enter()
+    .append('option')
+    .text(function(d) { return d; });
 
-  // var checkbox = d3.select('#select-area').append('input')
-  //   .attr('type', 'checkbox')
-  //   .attr('id', 'heatmap-checkbox')
-  //   .on('change', onChange)
-  //   .text('Toggle heatmap');
+  var checkbox = d3.select('#select-area').append('input')
+    .attr('type', 'checkbox')
+    .attr('id', 'heatmap-checkbox')
+    .on('change', onChange)
+    .text('Toggle heatmap');
 
-  // function onChange() {
-  //   var selected_shot = d3.select('select').property('value');
-  //   if (d3.select('#heatmap-checkbox').property('checked')) {
-  //     console.log('heatmap toggled');
-  //   }
-  //   else {
-  //     console.log('heatmap not toggled');
-  //   }
-  //   console.log(selected_shot);
-  // }
+  function onChange() {
+    var selected_shot = d3.select('select').property('value');
+    if (d3.select('#heatmap-checkbox').property('checked')) {
+      console.log('heatmap toggled');
+    }
+    else {
+      console.log('heatmap not toggled');
+    }
+    console.log(selected_shot);
+  }
 
   // END TOGGLING
 

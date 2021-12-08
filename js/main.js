@@ -5,18 +5,11 @@ var heightCourt = 500;
 var court;
 
 allData = [];
-var playerArray = ["LeBron James", "Kyrie Irving", "Stephen Curry", "Kevin Durant"];
-
-
 
 $.getJSON("data/playerdata1.json", function (jsonData) {
 
   console.log(jsonData)
 
-  // const filtered = jsonData.filter(function(player){
-  //   return player.full_name == "LeBron James"
-  // })
-  // console.log(filtered)
   const searchBar = document.getElementById('searchBar');
 
 
@@ -28,29 +21,26 @@ $.getJSON("data/playerdata1.json", function (jsonData) {
 
       return (
         player.full_name.includes(searchString)
-
       );
     });
-    console.log(filteredPlayers);
+    //console.log(filteredPlayers);
 
     const playersSlice = filteredPlayers.slice(0, 12);
 
     displayResults(playersSlice);
   });
 
+  searchBar.addEventListener('click', (e) => {
+    const searchString = e.target.value;
+    const filteredPlayers = jsonData.filter((player) => {
+    return (player.full_name.includes(searchString));
+    });
+    const playersSlice = filteredPlayers.slice(0, 12);
+    displayResults(playersSlice);
+  });
+
 });
-// const displayResults = (players) => {
-//   const htmlString = players
-//       .map((players) => {
-//           return `
-//           <li class="player">
-//               <h2>${players.full_name}</h2>
-//           </li>
-//       `;
-//       })
-//       .join('');
-//   playerList.innerHTML = htmlString;
-// };
+
 const displayResults = (players) => {
   const htmlString = players
     .map((players) => {
@@ -96,16 +86,6 @@ function loadData(playerId, playerName) {
     courtVis();
   })
 
-
-  // d3.csv("sample_lebrondata.csv").then(function(jsonData1){
-  //   d3.json("data/sample1.json").then(function(jsonData2) {
-  //     shotData = jsonData1;
-  //     regionData = jsonData2;
-  //     courtVis();
-
-  //   })
-
-  // });
 }
 
 function courtVis() {
