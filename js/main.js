@@ -65,9 +65,18 @@ const displayResults = (players) => {
  
   playerList.innerHTML = htmlString;
 };
+var playerHelper = []
 
 var search = function(player) {
+  if (playerHelper[0] != undefined){
+    playerHelper[0].style.backgroundColor = "#eaeaea";
+    playerHelper[0] = player
+  } else {
+    playerHelper[0] = player
+  }
+
   loadData(player.id, player.innerHTML)
+  player.style.backgroundColor = "yellow";
 };
 
 
