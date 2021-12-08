@@ -16,20 +16,17 @@
   <body onload="document.body.style.opacity='1'">
     <a href="processbook.html">Process Book</a>
 
-    <h1>
-      <center>NBA Shot Accuracy by Court Location
-    </h1>
+    <h1><center>NBA Shot Accuracy</h1>
 
     <div id="introtext" onload="this.style.opacity='1'">
       <br>
       <p>
-        <center>Search for an NBA player.
+        <center>Search for an NBA player (2020-21 season).
       </p>
       <div id="searchWrapper">
-        <input type="text" name="searchBar" id="searchBar" placeholder="search for a player" />
+        <input type="text" name="searchBar" id="searchBar" placeholder="type player name" />
       </div>
       <ul id="playerList"></ul>
-
     </div>
     <br>
 
@@ -40,6 +37,13 @@
         </div> -->
 
     <h4 id="playerHeading"></h4>
+    <div id="playerCard"><center>
+      <div id="tooltip">
+          <span id="courtTooltipClearText"></span>
+          <span id="courtTooltipText"></span>
+      </div>
+    </div>
+
     <div id="overall-court-area" class="float-container" onload="this.style.opacity='1'">
       <div id="court-area" class="float-child">
         <h2 id="courtTitle"></h2>
@@ -70,17 +74,13 @@
     </div>
     <!--end courtarea div-->
 
-
-
-
     <br>
 
     <br><br>
 
-
-    <!-- <script src="https://d3js.org/d3.v6.js"></script> -->
+    <script src="https://d3js.org/d3.v6.js"></script>
     <!-- <script src="js/d3-scale-chromatic.v0.3.min.js"></script> -->
-    <script src="js/d3.min.js"></script>
+    <!-- <script src="js/d3.min.js"></script> -->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/spin.js/2.0.1/spin.min.js'></script>
 
 
