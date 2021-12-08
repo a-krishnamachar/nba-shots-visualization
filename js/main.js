@@ -53,20 +53,25 @@ $.getJSON("data/playerdata1.json", function (jsonData) {
 // };
 const displayResults = (players) => {
   const htmlString = players
-      .map((players) => {
-          return `
+    .map((players) => {
+      return `
           <li class="player">
-              <button id="${players.id}" onclick="${loadData(players.first_name,players.last_name)}">${players.full_name}</button>
+              <button type="button" id="${players.first_name}_${players.last_name}" onclick="search(this)">${players.full_name}</button>
           </li>
       `;
-      })
-      .join('');
+    }
+    )
+    .join('');
+ 
   playerList.innerHTML = htmlString;
 };
 
+var search = function(player) {
+  loadData(player.id, player.innerHTML)
+};
 
 
-function loadData(playerfirstInput, playerlastInput) {
+function loadData(playerId, playerName) {
 
   // if (/\s/.test(playerInput)) {
   //
@@ -74,13 +79,14 @@ function loadData(playerfirstInput, playerlastInput) {
 
   //manually call player json file from specific year
   //d3.json("data/player_data/" + playerfirstInput + "_" + playerlastInput + ".json").then(function(jsonData1) {
-  let fileName = playerfirstInput + "_" + playerlastInput;
-  document.getElementById('playerHeading').innerHTML = playerfirstInput + " " + playerlastInput + " | 2020-21";
+  let fileName = playerId;
+  document.getElementById('playerHeading').innerHTML = playerName+ " | 2020-21";
 
   d3.json("data/player_data/" + fileName + ".json").then(function (jsonData) {
     shotData = jsonData;
     courtVis();
   })
+
 
   // d3.csv("sample_lebrondata.csv").then(function(jsonData1){
   //   d3.json("data/sample1.json").then(function(jsonData2) {
