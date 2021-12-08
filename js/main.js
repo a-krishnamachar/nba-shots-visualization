@@ -62,7 +62,7 @@ const displayResults = (players) => {
     }
     )
     .join('');
- 
+
   playerList.innerHTML = htmlString;
 };
 var playerHelper = []
@@ -128,7 +128,7 @@ function courtVis() {
   // document.getElementById('lineTooltipClearText').innerHTML = " i ";
   // document.getElementById('lineTooltipText').innerHTML = "This chart displays a player's shot accuracy the further they get from the hoop."
 
-  document.getElementById('pieChartTitle').innerHTML = "Field Goal Percentage from 2-Point and 3-Point Range";
+  document.getElementById('pieChartTitle').innerHTML = "Field Goal % | 2-Pointers v 3-Pointers";
   // document.getElementById('pieTooltipClearText').innerHTML = " i ";
   // document.getElementById('pieTooltipText').innerHTML = "These pie charts represent the differences in 2-pointers and 3-pointers taken." +
   //   "The blue slices represent the portion of shots made and the red slices the portion of shots missed.";
