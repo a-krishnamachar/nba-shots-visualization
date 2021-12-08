@@ -42,6 +42,15 @@ body {
 	opacity: 1;
 }
 
+#playerCard {
+	text-align: center;
+}
+/*#playerCardInfo {
+	opacity: 0;
+}
+#playerCardInfo:hover {
+	opacity: 1;
+}*/
 
 #playerSearchButton {
   width: 20%;

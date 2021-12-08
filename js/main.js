@@ -91,10 +91,8 @@ function loadPlayerCard(playerId, playerName) {
     console.log(playerInfoData);
 
 
-
     //document.getElementById('playerCard').innerHTML = "Player Information"
-     document.getElementById('courtTooltipClearText').innerHTML = " Player Information ";
-     document.getElementById('courtTooltipText').append
+     document.getElementById('playerCard').innerHTML = " Player Information ";
     // document.getElementById('lineTooltipText').innerHTML = "This chart displays a player's shot accuracy the further they get from the hoop."
 
 
@@ -106,7 +104,7 @@ function courtVis() {
   //clear court so there aren't duplicates
   d3.selectAll("svg").remove();
   d3.selectAll("select").remove();
-  d3.selectAll("input").remove();
+  d3.selectAll("input").attr("type", "checkbox").remove();
 
 
   //create all graph titles
