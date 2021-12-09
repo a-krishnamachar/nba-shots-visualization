@@ -45,13 +45,7 @@ body {
 #playerCard {
 	text-align: center;
 }
-/*#playerCard {
-	opacity: 0;
-}*/
-/*#playerCard:hover {
-	border: 5px solid black;
-	opacity: 1;
-}*/
+
 
 #playerSearchButton {
   width: 20%;
@@ -184,17 +178,45 @@ body {
     display: grid;
     text-align: center;
 }
+h1 {
+  text-align: center;
+  padding-left: 275px;
+}
 button {
 	font-size: 16px;
 	border-style: none;
-
-
+}
+a:link {
+  color: white;
+}
+a:hover {
+  color: black;
+}
+a:visited {
+  text-decoration: none;
+}
+#processlink {
+  float: right;
+  position: sticky;
+  top: 0;
+  background-color: #698df0;
+  color: white;
+  padding: 5px;
+  text-align: center;
+  border: 1px solid white;
+}
+#processlink:hover {
+  background-color: white;
 
 }
+/*#inpage_links {
+  position: sticky;
+  top: -10;
+}*/
 
 
 #searchBar {
-	font-family: 'Tahoma', serif;
+	font-family: 'Georgia', serif;
 
     width: 50%;
     height: 32px;
