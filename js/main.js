@@ -45,7 +45,7 @@ const displayResults = (players) => {
     .map((players) => {
       return `
           <li class="player">
-              <button type="button" id="${players.first_name}_${players.last_name}" onclick="search(this)">${players.full_name}</button>
+              <button type="button" id="${players.first_name}_${players.last_name}" onclick="search(this); autoScroll()">${players.full_name}</button>
           </li>
       `;
     }
@@ -93,7 +93,6 @@ function loadPlayerCard(playerId, playerName) {
     // console.log(infodata);
     // console.log(infodata.headers[1]);
     // console.log(infodata.rowSet[0][1]);
-    ///infodata.headers[0].
 
     //infodata.headers[0] information
     const arrayslots = [11, 12, 14, 19];
@@ -173,4 +172,11 @@ function mouseout() {
   document.getElementById("playerCard").style.opacity = 0;
   document.getElementById("playerHeading").style.color = "black";
 
+}
+
+function autoScroll() {
+  console.log("help!!")
+    $('html, body').animate({
+        scrollTop: $("#playerHeading").offset().top
+    }, 500);
 }
