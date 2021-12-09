@@ -142,9 +142,13 @@ CourtChart.prototype.updateVis = function () {
     .domain([-250, 250])
     .range([0, widthCourt]);
 
-  var yLocationScale = d3.scaleLinear()
+    var pointYLocationScale = d3.scaleLinear()
     .domain([-70, 440])
-    .range([-100, heightCourt - 100]);
+    .range([-17, heightCourt - 17]);
+
+  var cellYLocationScale = d3.scaleLinear()
+    .domain([-70, 440])
+    .range([0, heightCourt]);
 
   var opacityScale = d3.scaleLinear()
     .domain([0,1])
@@ -164,30 +168,31 @@ CourtChart.prototype.updateVis = function () {
     console.log(vis.shotData);
   
     var cellWidth = widthCourt / 15;
-    var cellHeight = heightCourt / 15;
-    var maxWidthIndex = 0;
-    var maxHeightIndex = 0;
-    // console.log("Cell width: " + cellWidth + " Cell height: " + cellHeight);
+    var cellHeight = widthCourt / 15;
+    var maxWidthIndex = 15;
+    var maxHeightIndex = 14;
+    console.log("Cell width: " + cellWidth + " Cell height: " + cellHeight);
     for (let i = 0; i < vis.shotData.length; i++) {
       let widthIndex = parseInt(xLocationScale(vis.shotData[i][17]) / cellWidth);
-      if (widthIndex > maxWidthIndex) {
-        maxWidthIndex = widthIndex;
-      }
-      let heightIndex = parseInt(yLocationScale(vis.shotData[i][18]) / cellHeight);
-      if (heightIndex > maxHeightIndex) {
-        maxHeightIndex = heightIndex;
-      }
+      // if (widthIndex > maxWidthIndex) {
+      //   maxWidthIndex = widthIndex;
+      // }
+      let heightIndex = parseInt(cellYLocationScale(vis.shotData[i][18]) / cellHeight) - 1;
+      // if (heightIndex > maxHeightIndex) {
+      //   maxHeightIndex = heightIndex;
+      // }
       // console.log(widthIndex + ", " + heightIndex);
       vis.shotData[i].width_index = widthIndex;
       vis.shotData[i].height_index = heightIndex;
   
     }
+    console.log("right here");
     console.log(vis.shotData);
     console.log("width in cells: " + maxWidthIndex);
     console.log("height in cells: " + maxHeightIndex);
-  
+
     var cellStatistics = [];
-    for (let i = 0; i < maxWidthIndex + 1; i++) {
+    for (let i = 0; i < maxWidthIndex; i++) {
       for (let j = 0; j < maxHeightIndex; j++) {
         var filteredShots = vis.shotData.filter(function (value) {
           return (value.width_index == i) && (value.height_index == j);
@@ -218,7 +223,7 @@ CourtChart.prototype.updateVis = function () {
         return cellWidth * d.width_index;
       })
       .attr("y", function (d) {
-        return heightCourt - 100 - (cellHeight * (d.height_index));
+        return heightCourt - 17 - (cellHeight * (d.height_index + 1));
       })
       .attr("width", cellWidth)
       .attr("height", cellHeight)
@@ -258,7 +263,7 @@ CourtChart.prototype.updateVis = function () {
       return xLocationScale(parseFloat(d[17]));
     })
     .attr('cy', function (d, i) {
-      return vis.height - yLocationScale(parseFloat(d[18]));
+      return vis.height + 100 -pointYLocationScale(parseFloat(d[18]));
     })
     .attr("r", 1)
     // .style("fill", "black")
