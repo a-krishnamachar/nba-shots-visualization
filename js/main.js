@@ -123,6 +123,7 @@ function courtVis() {
   d3.selectAll("svg").remove();
   d3.selectAll("select").remove();
   d3.selectAll("#heatmap-checkbox").remove();
+  d3.selectAll("#toggle-text").remove();
   // d3.selectAll("input").attr("type", "checkbox").remove();
 
 
