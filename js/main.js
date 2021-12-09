@@ -8,13 +8,13 @@ allData = [];
 
 $.getJSON("data/playerdata1.json", function (jsonData) {
 
-  console.log(jsonData);
+  // console.log(jsonData);
 
   const searchBar = document.getElementById('searchBar');
 
   //display updated names as user types
   searchBar.addEventListener('keyup', (e) => {
-    console.log(e.target.value)
+    // console.log(e.target.value)
     const searchString = e.target.value;
 
     const filteredPlayers = jsonData.filter((player) => {
@@ -89,7 +89,7 @@ function loadPlayerCard(playerId, playerName) {
   d3.json("data/player_background/" + fileName + ".json").then(function (backgroundData) {
     playerInfoData = backgroundData;
     var infodata = playerInfoData.resultSets;
-    console.log(playerInfoData.resultSets);
+    // console.log(playerInfoData.resultSets);
     // console.log(infodata);
     // console.log(infodata.headers[1]);
     // console.log(infodata.rowSet[0][1]);
@@ -145,7 +145,14 @@ function courtVis() {
 
 
   ///Instantiate visualization objects here
-  court = new CourtChart("court-area", shotData);
+  first_load = true;
+  heatmap_on = false;
+  shots_displayed = "All Shots";
+  console.log("here first load? " + first_load);
+  console.log("here heatmap on? " + heatmap_on);
+  console.log("here shots displayed: " + shots_displayed);
+  console.log(shotData);
+  court = new CourtChart("court-area", shotData, true, false, "All Shots");
 
   distanceChart = new DistanceChart("distance-chart-area", shotData);
 

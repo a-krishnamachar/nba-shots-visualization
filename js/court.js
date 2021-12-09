@@ -1,9 +1,11 @@
 
-function CourtChart(_parentElement, _data) {
+function CourtChart(_parentElement, _data, _first_load, _heatmap_on, _shots_displayed) {
   this.parentElement = _parentElement;
   this.shotData = _data;
+  this.first_load = _first_load;
+  this.heatmap_on = _heatmap_on;
+  this.shots_displayed = _shots_displayed;
   this.displayData = [];
-
 
   this.initVis();
 
@@ -59,7 +61,11 @@ function CellStats(width_index, height_index, cell_percentage) {
 }
 
 CourtChart.prototype.updateVis = function () {
+
   var vis = this;
+  console.log("first load? " + vis.first_load);
+  console.log("heatmap on? " + vis.heatmap_on);
+  console.log("shots displayed: " + vis.shots_displayed);
   console.log(vis.shotData);
 
   vis.shotData.sort(function (a,b) {
@@ -68,32 +74,62 @@ CourtChart.prototype.updateVis = function () {
 
   var shot_types = ["All Shots", "Made Shots", "Missed Shots"];
 
-  // // FOR TOGGLING - WAIT UNTIL SEARCH IS CORRECTLY SET UP
+  // FOR TOGGLING - WAIT UNTIL SEARCH IS CORRECTLY SET UP
 
-  var select = d3.select('#select-area').append('select')
-    .attr('class', 'shot-select')
-    .on('change', onChange);
+  var select = d3.select("#select-area").append('select')
+    .attr('id', "shot-select")
+    .on("change", onChange);
 
   var options = select.selectAll('option')
     .data(shot_types).enter()
     .append('option')
-    .text(function(d) { return d; });
+    .text(function(d) { return d; })
+    .property('selected', function(d) {
+      if (d == vis.shots_displayed) {
+        return true;
+      }
+      else { return false; }
+    });
+
+  d3.select("#select-area").append('text')
+    .attr("id", "toggle-text")
+    .text('Toggle heatmap');
 
   var checkbox = d3.select('#select-area').append('input')
     .attr('type', 'checkbox')
     .attr('id', 'heatmap-checkbox')
-    .on('change', onChange)
-    .text('Toggle heatmap');
+    .property('checked', function() {
+      console.log("checkingggg heatmap on: " + vis.heatmap_on);
+      if (vis.heatmap_on) {
+        console.log("nay");
+        return true;
+      }
+      else {
+        console.log("yay");
+        return false;
+      }
+    })
+    .text('Toggle heatmap')
+    .on('change', onChange);
 
   function onChange() {
-    var selected_shot = d3.select('select').property('value');
     if (d3.select('#heatmap-checkbox').property('checked')) {
-      console.log('heatmap toggled');
+      vis.heatmap_on = true;
     }
     else {
-      console.log('heatmap not toggled');
+      vis.heatmap_on = false;
     }
-    console.log(selected_shot);
+    vis.first_load = false;
+    vis.shots_displayed = d3.select('#shot-select').property('value');
+    d3.select("#shot-select").remove();
+    d3.select("#heatmap-checkbox").remove();
+    d3.select("#toggle-text").remove();
+    d3.selectAll("svg").remove();
+    court = new CourtChart("court-area", vis.shotData, vis.first_load, vis.heatmap_on, vis.shots_displayed);
+    distanceChart = new DistanceChart("distance-chart-area", vis.shotData);
+
+    shotPieChart = new ShotPieChart("shot-pie-chart-area", vis.shotData);
+
   }
 
   // END TOGGLING
@@ -104,11 +140,11 @@ CourtChart.prototype.updateVis = function () {
 
   var xLocationScale = d3.scaleLinear()
     .domain([-250, 250])
-    .range([0, vis.width]);
+    .range([0, widthCourt]);
 
   var yLocationScale = d3.scaleLinear()
     .domain([-70, 440])
-    .range([0, vis.height]);
+    .range([-100, heightCourt - 100]);
 
   var opacityScale = d3.scaleLinear()
     .domain([0,1])
@@ -118,82 +154,99 @@ CourtChart.prototype.updateVis = function () {
   .interpolator(d3.interpolateRdBu)
   .domain([1,0]);
 
-  // // GRID HEATMAP CREATION
+  console.log("now i'm here");
+  console.log(vis.heatmap_on);
 
-  // console.log("here now");
-  // console.log(vis.shotData);
+  // GRID HEATMAP CREATION
 
-  // var cellWidth = vis.width / 15;
-  // var cellHeight = vis.height / 15;
-  // var maxWidthIndex = 0;
-  // var maxHeightIndex = 0;
-  // console.log("Cell width: " + cellWidth + " Cell height: " + cellHeight);
-  // for (let i = 0; i < vis.shotData.length; i++) {
-  //   let widthIndex = parseInt(xLocationScale(vis.shotData[i][17]) / cellWidth);
-  //   if (widthIndex > maxWidthIndex) {
-  //     maxWidthIndex = widthIndex;
-  //   }
-  //   let heightIndex = parseInt(yLocationScale(vis.shotData[i][18]) / cellHeight);
-  //   if (heightIndex > maxHeightIndex) {
-  //     maxHeightIndex = heightIndex;
-  //   }
-  //   console.log(widthIndex + ", " + heightIndex);
-  //   vis.shotData[i].width_index = widthIndex;
-  //   vis.shotData[i].height_index = heightIndex;
+  if (vis.heatmap_on) {
+    console.log("here now");
+    console.log(vis.shotData);
+  
+    var cellWidth = widthCourt / 15;
+    var cellHeight = heightCourt / 15;
+    var maxWidthIndex = 0;
+    var maxHeightIndex = 0;
+    // console.log("Cell width: " + cellWidth + " Cell height: " + cellHeight);
+    for (let i = 0; i < vis.shotData.length; i++) {
+      let widthIndex = parseInt(xLocationScale(vis.shotData[i][17]) / cellWidth);
+      if (widthIndex > maxWidthIndex) {
+        maxWidthIndex = widthIndex;
+      }
+      let heightIndex = parseInt(yLocationScale(vis.shotData[i][18]) / cellHeight);
+      if (heightIndex > maxHeightIndex) {
+        maxHeightIndex = heightIndex;
+      }
+      // console.log(widthIndex + ", " + heightIndex);
+      vis.shotData[i].width_index = widthIndex;
+      vis.shotData[i].height_index = heightIndex;
+  
+    }
+    console.log(vis.shotData);
+    console.log("width in cells: " + maxWidthIndex);
+    console.log("height in cells: " + maxHeightIndex);
+  
+    var cellStatistics = [];
+    for (let i = 0; i < maxWidthIndex + 1; i++) {
+      for (let j = 0; j < maxHeightIndex; j++) {
+        var filteredShots = vis.shotData.filter(function (value) {
+          return (value.width_index == i) && (value.height_index == j);
+        })
+        var madeShots = d3.sum(filteredShots, d => d[20]);
+        var totalShots = d3.sum(filteredShots, d => d[19]);
+        var cellPercentage;
+        if (totalShots == 0) {
+          cellPercentage = 0.5;
+        }
+        else {
+          cellPercentage = (madeShots / totalShots).toFixed(3);
+        }
+        var newCell = new CellStats(i, j, parseFloat(cellPercentage));
+        cellStatistics.push(newCell);
+      }
+    }
+    console.log("cell stats");
+    console.log(cellStatistics);
+  
+    var heatCell = vis.svg.selectAll(".heat-cell")
+      .data(cellStatistics);
+  
+    heatCell.enter().append("rect")
+      .merge(heatCell)
+      .attr("class", "heat-cell")
+      .attr("x", function (d) {
+        return cellWidth * d.width_index;
+      })
+      .attr("y", function (d) {
+        return heightCourt - 100 - (cellHeight * (d.height_index));
+      })
+      .attr("width", cellWidth)
+      .attr("height", cellHeight)
+      // .attr("fill", function(d) {
+      //   return colorScale(d.cell_percentage);
+      // })
+      // .style("opacity", 0.4)
+      .attr("fill", "red")
+      .style("opacity", function(d) {
+        return opacityScale(d.cell_percentage);
+      });
+  }
 
-  // }
-  // console.log(vis.shotData);
-  // console.log("width in cells: " + maxWidthIndex);
-  // console.log("height in cells: " + maxHeightIndex);
-
-  // var cellStatistics = [];
-  // for (let i = 0; i < maxWidthIndex + 1; i++) {
-  //   for (let j = 0; j < maxHeightIndex; j++) {
-  //     var filteredShots = vis.shotData.filter(function (value) {
-  //       return (value.width_index == i) && (value.height_index == j);
-  //     })
-  //     var madeShots = d3.sum(filteredShots, d => d[20]);
-  //     var totalShots = d3.sum(filteredShots, d => d[19]);
-  //     var cellPercentage;
-  //     if (totalShots == 0) {
-  //       cellPercentage = 0.5;
-  //     }
-  //     else {
-  //       cellPercentage = (madeShots / totalShots).toFixed(3);
-  //     }
-  //     var newCell = new CellStats(i, j, parseFloat(cellPercentage));
-  //     cellStatistics.push(newCell);
-  //   }
-  // }
-  // console.log("cell stats");
-  // console.log(cellStatistics);
-
-  // var heatCell = vis.svg.selectAll(".heat-cell")
-  //   .data(cellStatistics);
-
-  // heatCell.enter().append("rect")
-  //   .merge(heatCell)
-  //   .attr("class", "heat-cell")
-  //   .attr("x", function (d) {
-  //     return cellWidth * d.width_index;
-  //   })
-  //   .attr("y", function (d) {
-  //     return vis.height - 27 - (cellHeight * (d.height_index));
-  //   })
-  //   .attr("width", cellWidth)
-  //   .attr("height", cellHeight)
-  //   // .attr("fill", function(d) {
-  //   //   return colorScale(d.cell_percentage);
-  //   // })
-  //   // .style("opacity", 0.4)
-  //   .attr("fill", "red")
-  //   .style("opacity", function(d) {
-  //     return opacityScale(d.cell_percentage);
-  //   });
-
-  //  // END HEAT MAP CREATION
+   // END HEAT MAP CREATION
 
   // SHOT POINT DYNAMIC CREATION
+
+  // if (vis.shots_displayed == "Made Shots") {
+  //   vis.shotData = vis.shotData.filter(function(value, index) {
+  //     return value[10] == "Made Shot";
+  //   })
+  // }
+  // else if (vis.shots_displayed == "Missed Shots") {
+  //   vis.shotData = vis.shotData.filter(function(value, index) {
+  //     return value[10] == "Missed Shot";
+  //   })
+  // }
+  // console.log(vis.shots_displayed);
 
   var shotPoint = vis.svg.selectAll(".shot-point")
     .data(vis.shotData);
@@ -217,7 +270,8 @@ CourtChart.prototype.updateVis = function () {
       if (d[10] == "Missed Shot") { return "red" }
       else { return "black"}
     })
-    .attr("visibility", "hidden")
+    .attr("visibility", "hidden"
+    )
     .on("mouseover", shotMouseOver)
     .on("mouseout", shotMouseOut)
     .transition()
@@ -225,9 +279,20 @@ CourtChart.prototype.updateVis = function () {
     //   return delayRandomizer(Math.random());
     // })
     .delay(function(d,i) {
-      return 10*i;
+      if (vis.first_load) {
+        return 10*i;
+      }
+      else { return 1; }
     })
-    .attr("visibility", "visible");
+    .attr("visibility", function(d,i) {
+      var shot_displayed = vis.shots_displayed.substring(0, vis.shots_displayed.length - 1);
+      if ((shot_displayed == d[10]) || vis.shots_displayed == "All Shots") {
+        return "visible";
+      }
+      else {
+        return "hidden";
+      }
+    });
 
   shotPoint.exit().remove();
 
