@@ -180,7 +180,6 @@ body {
 }
 h1 {
   text-align: center;
-  padding-left: 275px;
 }
 button {
 	font-size: 16px;
@@ -196,10 +195,11 @@ a:visited {
   text-decoration: none;
 }
 #processlink {
-  float: right;
+  float: left;
   position: sticky;
   top: 0;
-  background-color: #698df0;
+  background-color: lightgrey;
+  opacity: 0.7;
   color: white;
   padding: 5px;
   text-align: center;
@@ -207,11 +207,26 @@ a:visited {
 }
 #processlink:hover {
   color: black;
+  background-color: #7084e6;
+  opacity: 1;
 }
-/*#inpage_links {
-  position: sticky;
-  top: -10;
-}*/
+a:visited {
+  color: white;
+}
+
+.row {
+	display: flex;
+	flex-wrap: wrap;
+}
+.col-4 {
+	flex: 0 0 33.3%;
+}
+.col-8 {
+	flex: 0 0 66.7%;
+}
+.w-100 {
+	width: 90%!important;
+}
 
 
 #searchBar {

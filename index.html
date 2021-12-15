@@ -6,6 +6,7 @@
   <meta name="description" content="">
   <title>CSE457 Final Project - NBA Shot Accuracy</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
 
 <body>
@@ -13,13 +14,101 @@
   <script src="https://cdn.jsdelivr.net/npm/d3-interpolate@3"></script>
   <script src="https://cdn.jsdelivr.net/npm/d3-scale-chromatic@3"></script>
 
+  <!-- if want modal to show on pageload -->
+  <!-- <script>
+  $(document).ready(function(){
+      $("#myModal").modal('show');
+  });
+  </script> -->
+
   <body onload="document.body.style.opacity='1'">
     <div id="processlink">
     <a href="processbook.html">Process Book</a> <br>
     <a href="#playerHeading">Court + Distance View</a> |
     <a href="#pie-chart-total">Field Goal %</a>
     </div>
-    <h1>NBA Shot Accuracy</h1>
+
+    <!-- modal goes here! -->
+    <div class="container">
+
+
+    <button type="button" style="float: right; border: 1px solid white" class="btn btn-info btn-lg"
+      data-toggle="modal" data-target="#myModal">About</button>
+
+
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">About</h4>
+          </div>
+
+          <div class="modal-body">
+
+            <h4>How to Use</h4>
+            <p>This tool has four portions. </p><br>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-4">
+                <img class="w-100" src="data/search.png" alt="search thumbnail">
+                <br>
+                <img class="w-100" src="data/courtVis.png" alt="courtvis">
+              </div>
+              <div class="col-8">
+                <h5>Shot Chart</h5>
+            <p>The first is a searchbar. Use this to search for NBA players from the 2020-21 season.
+            You can click on one of the preset players to start searching;
+            or you can type a player's name into the searchbox
+            and explore that way. The image on the left is a snapshot of selecting a player.
+            </p>
+            <p>The second is a shot chart. This displays an individual player's shot attempts from the entire
+              2020-21 season. Hover over the dots for more. (Steph Curry's shot chart shown at left).
+            </p>
+            <p>The third is a graph displaying a player's shot accuracy as a function of distance (i.e.,
+              as they get further away from the hoop). Brush on this graph to filter shots on the court by distance.
+            </p>
+            <p>The fourth is a series of pie charts displaying the accuracy percentage
+              for both 2-pointers and 3-pointers (outside the arc). The sizes of the charts correspond to how
+              of each type of shot a player took. For example, Rudy Gobert's 3-point chart is tiny, as he only attempted
+              4 3-pointers in the entire season.
+            </p>
+
+              </div>
+            </div>
+
+          <div class="row">
+            <div class="col-4">
+              <!-- <img class="w-100" src="data/courtVis.png" alt="courtvis"> -->
+            </div>
+            <div class="col-8">
+            <h4 >Background</h4>
+            <p>The NBA is one of the most popular sports leagues in the world. Tracking and visualizing
+              player statistics has become very popular in the past few years. With this tool, we hope to
+              give more information about individual players' shot-taking -- where on the court they shoot from,
+              how much they shoot the ball, and of course, how good they are at it. Please see our
+              <a style="color: blue;"href="processbook.html">Process Book</a>
+              for more about our design, methodology, and iterative process.
+
+            </p>
+          </div>
+          </div>
+
+            <p>Click "About" at the top of the page to access this popup again. You can use the top left box to
+           navigate around the page as well as access the Process Book and our demo video. </p>
+          </div>
+
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <h1><center>NBA Shot Accuracy</h1>
 
     <div id="introtext" onload="this.style.opacity='1'">
       <br>
@@ -99,7 +188,7 @@
 
     <script src="js/jquery.min.js"></script>
     <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="data/playerdata1.json"></script>
 
     <script src="js/main.js"></script>

@@ -109,7 +109,7 @@ function loadPlayerCard(playerId, playerName) {
       ul.appendChild(li);
     }
 
-    document.getElementById("playerCard").style.opacity = 0;
+    document.getElementById("playerCard").style.opacity = 1;
 
 
     //  document.getElementById('playerCardInfo').innerHTML = " Player asfa ";
@@ -166,15 +166,15 @@ function toolTip() {
   var element = document.getElementById('chartTitle');
 
 }
-function mouseover() {
-  document.getElementById("playerCard").style.opacity = 1;
-  document.getElementById("playerHeading").style.color = "#0756ab";
-}
-function mouseout() {
-  document.getElementById("playerCard").style.opacity = 0;
-  document.getElementById("playerHeading").style.color = "black";
-
-}
+// function mouseover() {
+//   document.getElementById("playerCard").style.opacity = 1;
+//   document.getElementById("playerHeading").style.color = "#0756ab";
+// }
+// function mouseout() {
+//   document.getElementById("playerCard").style.opacity = 0;
+//   document.getElementById("playerHeading").style.color = "black";
+//
+// }
 
 function autoScroll() {
   console.log("help!!")
