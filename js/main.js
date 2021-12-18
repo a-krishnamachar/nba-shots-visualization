@@ -9,10 +9,17 @@ allData = [];
 $.getJSON("data/playerdata1.json", function (jsonData) {
 
   // console.log(jsonData);
+  const recPlayers = [{'id': 201939, 'full_name': 'Stephen Curry', 'first_name': 'Stephen', 'last_name': 'Curry', 'is_active': 'True'},{'id': 203081, 'full_name': 'Damian Lillard', 'first_name': 'Damian', 'last_name': 'Lillard', 'is_active': "True"},{'id': 203954, 'full_name': 'Joel Embiid', 'first_name': 'Joel', 'last_name': 'Embiid', 'is_active': 'True'},{'id': 2544, 'full_name': 'LeBron James', 'first_name': 'LeBron', 'last_name': 'James', 'is_active': 'True'},{'id': 1629130, 'full_name': 'Duncan Robinson', 'first_name': 'Duncan', 'last_name': 'Robinson', 'is_active': 'True'},{'id': 203497, 'full_name': 'Rudy Gobert', 'first_name': 'Rudy', 'last_name': 'Gobert', 'is_active': 'True'},{'id': 203507, 'full_name': 'Giannis Antetokounmpo', 'first_name': 'Giannis', 'last_name': 'Antetokounmpo', 'is_active': 'True'},{'id': 1629029, 'full_name': 'Luka Doncic', 'first_name': 'Luka', 'last_name': 'Doncic', 'is_active': 'True'},{'id': 101108, 'full_name': 'Chris Paul', 'first_name': 'Chris', 'last_name': 'Paul', 'is_active': 'True'},{'id': 202711, 'full_name': 'Bojan Bogdanovic', 'first_name': 'Bojan', 'last_name': 'Bogdanovic', 'is_active': 'True'},{'id': 1627732, 'full_name': 'Ben Simmons', 'first_name': 'Ben', 'last_name': 'Simmons', 'is_active': 'True'},{'id': 1627741, 'full_name': 'Buddy Hield', 'first_name': 'Buddy', 'last_name': 'Hield', 'is_active': 'True'}]
 
   const searchBar = document.getElementById('searchBar');
 
   //display updated names as user types
+  
+
+
+  console.log(recPlayers)
+  displayResults(recPlayers);
+
   searchBar.addEventListener('keyup', (e) => {
     // console.log(e.target.value)
     const searchString = e.target.value;
@@ -65,7 +72,7 @@ var search = function(player) {
   }
 
   loadData(player.id, player.innerHTML);
-  player.style.backgroundColor = "#eb3bb9";
+  player.style.backgroundColor = "#89CFF0";
 };
 
 
