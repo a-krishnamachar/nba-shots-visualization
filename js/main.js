@@ -154,7 +154,8 @@ function courtVis() {
   // document.getElementById('pieTooltipText').innerHTML = "These pie charts represent the differences in 2-pointers and 3-pointers taken." +
   //   "The blue slices represent the portion of shots made and the red slices the portion of shots missed.";
   document.getElementById('pieLegend').innerHTML = "These pie charts represent the differences in 2-pointers and 3-pointers taken." +
-    "The black slices represent the portion of shots made and the red slices the portion of shots missed.";
+    " The black slices represent the portion of shots made and the red slices the portion of shots missed." +
+    " The sizes are proportional to the number of shots taken.";
 
 
 

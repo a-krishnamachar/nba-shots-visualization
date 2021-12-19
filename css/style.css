@@ -66,10 +66,23 @@ li {
   cursor: pointer;
 }
 #tooltip {
-	position: relative;
 	border-radius: 6px;
 }
 
+div.tooltip {
+    /*position: relative;*/
+    text-align: center;
+    width: 150px;
+    height: 30px;
+    padding: 2px;
+    font: 12px sans-serif;
+    background: lightgrey;
+    left: 400px;
+    bottom: 50px;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+}
 
 #tooltip #courtTooltipText {
 	visibility: hidden;

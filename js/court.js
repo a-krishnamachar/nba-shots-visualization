@@ -76,6 +76,10 @@ CourtChart.prototype.updateVis = function () {
 
   // FOR TOGGLING - WAIT UNTIL SEARCH IS CORRECTLY SET UP
 
+  var div = d3.select("body").append("div")
+      .attr("class", "tooltip")
+      .style("opacity", 0);
+
   var select = d3.select("#select-area").append('select')
     .attr('id', "shot-select")
     .on("change", onChange);
@@ -166,7 +170,7 @@ CourtChart.prototype.updateVis = function () {
   if (vis.heatmap_on) {
     console.log("here now");
     console.log(vis.shotData);
-  
+
     var cellWidth = widthCourt / 15;
     var cellHeight = widthCourt / 15;
     var maxWidthIndex = 15;
@@ -184,7 +188,7 @@ CourtChart.prototype.updateVis = function () {
       // console.log(widthIndex + ", " + heightIndex);
       vis.shotData[i].width_index = widthIndex;
       vis.shotData[i].height_index = heightIndex;
-  
+
     }
     console.log("right here");
     console.log(vis.shotData);
@@ -212,10 +216,10 @@ CourtChart.prototype.updateVis = function () {
     }
     console.log("cell stats");
     console.log(cellStatistics);
-  
+
     var heatCell = vis.svg.selectAll(".heat-cell")
       .data(cellStatistics);
-  
+
     heatCell.enter().append("rect")
       .merge(heatCell)
       .attr("class", "heat-cell")
@@ -256,6 +260,8 @@ CourtChart.prototype.updateVis = function () {
   var shotPoint = vis.svg.selectAll(".shot-point")
     .data(vis.shotData);
 
+
+
   shotPoint.enter().append("circle")
     .merge(shotPoint)
     .attr("class", "shot-point")
@@ -277,8 +283,19 @@ CourtChart.prototype.updateVis = function () {
     })
     .attr("visibility", "hidden"
     )
-    .on("mouseover", shotMouseOver)
-    .on("mouseout", shotMouseOut)
+
+    .on("mouseover", function(d,i) {
+      console.log(i)
+      div.transition().duration(200)
+        .style("opacity", .8);
+        div	.html("Shot taken: " + i[21] + "<br/>"
+      + "Opponent: " + i[22]
+    );
+    })
+    .on("mouseout", function(d) {
+      div.transition().duration(300)
+        .style("opacity", 0);
+    })
     .transition()
     // .delay(function () {
     //   return delayRandomizer(Math.random());
@@ -305,7 +322,8 @@ CourtChart.prototype.updateVis = function () {
 
 
   function shotMouseOver(d, i) {
-    // console.log("Here");
+
+    console.log("Here");
     // console.log(i[10]);
     // console.log(i[12]);
     // console.log(i[13]);
