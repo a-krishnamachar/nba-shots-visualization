@@ -11,5 +11,5 @@ https://www.w3schools.com/howto/howto_js_filter_lists.asp
 Tooltip inspiration:
 https://www.w3schools.com/css/css_tooltip.asp
 
-Add scroll feature / "tips" for viewer on page
-Responsive SVG
+About section:
+https://getbootstrap.com/docs/4.0/components/modal/

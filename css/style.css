@@ -46,6 +46,13 @@ body {
 	text-align: center;
 }
 
+/*li:hover {
+  background-color: pink;
+}
+li {
+  background-color: white;
+}*/
+
 
 #playerSearchButton {
   width: 20%;
@@ -178,7 +185,7 @@ body {
     display: grid;
     text-align: center;
 }
-.player:hover {	
+.player:hover {
 	color: #7084e6;
 	opacity: 1;
   }

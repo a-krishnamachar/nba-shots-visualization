@@ -56,7 +56,7 @@ ShotPieChart.prototype.updateVis = function () {
     var threePointData = { "made": threePointPercentage, "missed": 1 - threePointPercentage };
 
     var colorScale = d3.scaleOrdinal()
-        .range(["blue", "red"]);
+        .range(["black", "red"]);
 
     var radiusScale = d3.scaleLinear()
         .domain([0, 1])
@@ -94,6 +94,7 @@ ShotPieChart.prototype.updateVis = function () {
         .attr("transform", function(d) {
             return "translate(" + d3.arc().innerRadius(0).outerRadius(radiusScale(total_twoPointers / totalShots)).centroid(d) + ")";
         })
+        .style("fill", "blue")
         .style("text-anchor", "middle")
         .style("opacity", 0.7);
 
@@ -126,6 +127,7 @@ ShotPieChart.prototype.updateVis = function () {
         .attr("transform", function(d) {
             return "translate(" + d3.arc().innerRadius(0).outerRadius(radiusScale(total_threePointers / totalShots)).centroid(d) + ")";
         })
+        .style("fill", "blue")
         .style("text-anchor", "middle")
         .style("opacity", 0.7);
 

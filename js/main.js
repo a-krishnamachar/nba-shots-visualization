@@ -14,7 +14,7 @@ $.getJSON("data/playerdata1.json", function (jsonData) {
   const searchBar = document.getElementById('searchBar');
 
   //display updated names as user types
-  
+
 
   displayResults(recPlayers);
 
@@ -153,6 +153,9 @@ function courtVis() {
   // document.getElementById('pieTooltipClearText').innerHTML = " i ";
   // document.getElementById('pieTooltipText').innerHTML = "These pie charts represent the differences in 2-pointers and 3-pointers taken." +
   //   "The blue slices represent the portion of shots made and the red slices the portion of shots missed.";
+  document.getElementById('pieLegend').innerHTML = "These pie charts represent the differences in 2-pointers and 3-pointers taken." +
+    "The black slices represent the portion of shots made and the red slices the portion of shots missed.";
+
 
 
   ///Instantiate visualization objects here
