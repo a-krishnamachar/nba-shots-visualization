@@ -1,10 +1,12 @@
 
-function CourtChart(_parentElement, _data, _first_load, _heatmap_on, _shots_displayed) {
+function CourtChart(_parentElement, _data, _first_load, _heatmap_on, _shots_displayed, _min_distance, _max_distance) {
   this.parentElement = _parentElement;
   this.shotData = _data;
   this.first_load = _first_load;
   this.heatmap_on = _heatmap_on;
   this.shots_displayed = _shots_displayed;
+  this.min_distance = _min_distance;
+  this.max_distance = _max_distance;
   this.displayData = [];
 
   this.initVis();
@@ -21,6 +23,7 @@ CourtChart.prototype.initVis = function () {
     vis.height = heightCourt - vis.margin.top - vis.margin.bottom;
 
   vis.svg = d3.select("#court-area").append("svg")
+    .attr("class", "the-court")
     .attr("viewBox", '0 0 500 500')
     // .attr("width", "50%")
     //.attr("width", widthCourt)
@@ -128,11 +131,13 @@ CourtChart.prototype.updateVis = function () {
     d3.select("#shot-select").remove();
     d3.select("#heatmap-checkbox").remove();
     d3.select("#toggle-text").remove();
-    d3.selectAll("svg").remove();
-    court = new CourtChart("court-area", vis.shotData, vis.first_load, vis.heatmap_on, vis.shots_displayed);
-    distanceChart = new DistanceChart("distance-chart-area", vis.shotData);
+    d3.select(".the-court").select("circle").remove();
+    d3.select(".the-court").select("g").remove();
+    d3.select(".the-court").remove();
+    court = new CourtChart("court-area", vis.shotData, vis.first_load, vis.heatmap_on, vis.shots_displayed, vis.min_distance, vis.max_distance);
+    // distanceChart = new DistanceChart("distance-chart-area", vis.shotData);
 
-    shotPieChart = new ShotPieChart("shot-pie-chart-area", vis.shotData);
+    // shotPieChart = new ShotPieChart("shot-pie-chart-area", vis.shotData);
 
   }
 
@@ -280,6 +285,17 @@ CourtChart.prototype.updateVis = function () {
     .style("fill", function(d, i) {
       if (d[10] == "Missed Shot") { return "red" }
       else { return "black"}
+    })
+    .attr("opacity", function(d) {
+      if (vis.min_distance == null && vis.max_distance == null) {
+        return 1.0
+      }
+      else {
+        if (d[16] >= vis.min_distance && d[16] < vis.max_distance) {
+          return 1.0;
+        }
+        else { return 0; }
+      }
     })
     .attr("visibility", "hidden"
     )

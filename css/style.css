@@ -263,3 +263,9 @@ a:visited {
     padding: 5px 10px;
     font-size: 16px;
 }
+
+.brush .extent {
+	stroke: #fff;
+	fill-opacity: .125;
+	shape-rendering: crispEdges;
+  }

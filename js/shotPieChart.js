@@ -29,6 +29,10 @@ ShotPieChart.prototype.initVis = function () {
 ShotPieChart.prototype.updateVis = function () {
     var vis = this;
 
+    var div = d3.select("#pie-chart-tooltip").append("div")
+    .attr("class", "pie-tooltip")
+    .style("opacity", 0);
+
     var totalShots = vis.shotData.length;
     console.log("total shots: " + totalShots);
     var twoPointers = vis.shotData.filter(function (value, index) {
@@ -52,8 +56,8 @@ ShotPieChart.prototype.updateVis = function () {
     var madeThreesCount = madeThreePointers.length;
     var twoPointPercentage = madeTwosCount / total_twoPointers;
     var threePointPercentage = madeThreesCount / total_threePointers;
-    var twoPointData = { "made": twoPointPercentage, "missed": 1 - twoPointPercentage };
-    var threePointData = { "made": threePointPercentage, "missed": 1 - threePointPercentage };
+    var twoPointData = { "twos made": twoPointPercentage, "twos missed": 1 - twoPointPercentage };
+    var threePointData = { "threes made": threePointPercentage, "threes missed": 1 - threePointPercentage };
 
     var colorScale = d3.scaleOrdinal()
         .range(["black", "red"]);
@@ -81,22 +85,33 @@ ShotPieChart.prototype.updateVis = function () {
         .attr('fill', function (d) { return colorScale(d.data[1]) })
         .attr('stroke', 'black')
         .style('stroke-width', '2px')
-        .style('opacity', 0.7);
+        .style('opacity', 0.7)
+        .on("mouseover", function(d,i) {
+            console.log(i)
+            div.transition().duration(200)
+              .style("opacity", .8);
+              div	.html((i.data[1]*100).toFixed(2) + "% of " + i.data[0]
+          );
+          })
+          .on("mouseout", function(d) {
+            div.transition().duration(300)
+              .style("opacity", 0);
+          });
 
-    vis.svg.selectAll('slices')
-        .data(pie2_ready)
-        .enter()
-        .append('text')
-        .text(function(d) {
-            console.log(d);
-            return (100*d.data[1]).toFixed(2) + "%";
-        })
-        .attr("transform", function(d) {
-            return "translate(" + d3.arc().innerRadius(0).outerRadius(radiusScale(total_twoPointers / totalShots)).centroid(d) + ")";
-        })
-        .style("fill", "blue")
-        .style("text-anchor", "middle")
-        .style("opacity", 0.7);
+    // vis.svg.selectAll('slices')
+    //     .data(pie2_ready)
+    //     .enter()
+    //     .append('text')
+    //     .text(function(d) {
+    //         console.log(d);
+    //         return (100*d.data[1]).toFixed(2) + "%";
+    //     })
+    //     .attr("transform", function(d) {
+    //         return "translate(" + d3.arc().innerRadius(0).outerRadius(radiusScale(total_twoPointers / totalShots)).centroid(d) + ")";
+    //     })
+    //     .style("fill", "blue")
+    //     .style("text-anchor", "middle")
+    //     .style("opacity", 0.7);
 
     vis.svg.append("text")
         .text("2-PT FGs (" + total_twoPointers + " attempted)")
@@ -114,22 +129,33 @@ ShotPieChart.prototype.updateVis = function () {
         .attr('fill', function (d) { return colorScale(d.data[1]) })
         .attr('stroke', 'black')
         .style('stroke-width', '2px')
-        .style('opacity', 0.7);
+        .style('opacity', 0.7)
+        .on("mouseover", function(d,i) {
+            console.log(i)
+            div.transition().duration(200)
+              .style("opacity", .8);
+              div	.html((i.data[1]*100).toFixed(2) + "% of " + i.data[0]
+          );
+          })
+          .on("mouseout", function(d) {
+            div.transition().duration(300)
+              .style("opacity", 0);
+          });
 
-        vis.svg2.selectAll('slices')
-        .data(pie3_ready)
-        .enter()
-        .append('text')
-        .text(function(d) {
-            console.log(d);
-            return (100*d.data[1]).toFixed(2) + "%";
-        })
-        .attr("transform", function(d) {
-            return "translate(" + d3.arc().innerRadius(0).outerRadius(radiusScale(total_threePointers / totalShots)).centroid(d) + ")";
-        })
-        .style("fill", "blue")
-        .style("text-anchor", "middle")
-        .style("opacity", 0.7);
+        // vis.svg2.selectAll('slices')
+        // .data(pie3_ready)
+        // .enter()
+        // .append('text')
+        // .text(function(d) {
+        //     console.log(d);
+        //     return (100*d.data[1]).toFixed(2) + "%";
+        // })
+        // .attr("transform", function(d) {
+        //     return "translate(" + d3.arc().innerRadius(0).outerRadius(radiusScale(total_threePointers / totalShots)).centroid(d) + ")";
+        // })
+        // .style("fill", "blue")
+        // .style("text-anchor", "middle")
+        // .style("opacity", 0.7);
 
         vis.svg2.append("text")
         .text("3-PT FGs (" + total_threePointers + " attempted)")

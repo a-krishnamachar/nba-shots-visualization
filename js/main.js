@@ -167,7 +167,7 @@ function courtVis() {
   console.log("here heatmap on? " + heatmap_on);
   console.log("here shots displayed: " + shots_displayed);
   console.log(shotData);
-  court = new CourtChart("court-area", shotData, true, false, "All Shots");
+  court = new CourtChart("court-area", shotData, true, false, "All Shots", null, null);
 
   distanceChart = new DistanceChart("distance-chart-area", shotData);
 
@@ -196,3 +196,46 @@ function autoScroll() {
         scrollTop: $("#playerHeading").offset().top
     }, 500);
 }
+
+// function brushed({selection}) {
+
+//   // TO-DO: React to 'brushed' event
+//   console.log("brushing");
+//   console.log(selection);
+//   var distanceMax = distanceChart.xContext.domain()[1];
+//   var rangeMax = distanceChart.width;
+//   var distanceScale = d3.scaleLinear()
+//     .domain([0, rangeMax])
+//     .range([0, distanceMax]);
+
+//   var selectedDistanceMin = (distanceScale(selection[0]) + 1).toFixed(0);
+//   var selectedDistanceMax = (distanceScale(selection[1]) + 1).toFixed(0);
+//   console.log("[" + selectedDistanceMin + ", " + selectedDistanceMax + "]");
+// // updating
+//   vis.heatmap_on = false;
+//   if (d3.select('#heatmap-checkbox').property('checked')) {
+//     vis.heatmap_on = true;
+//   }
+//   else {
+//     vis.heatmap_on = false;
+//   }
+//   vis.first_load = false;
+//   vis.shots_displayed = d3.select('#shot-select').property('value');
+//   d3.select("#shot-select").remove();
+//   d3.select("#heatmap-checkbox").remove();
+//   d3.select("#toggle-text").remove();
+//   d3.selectAll("svg").remove();
+//   court = new CourtChart("court-area", vis.shotData, vis.first_load, vis.heatmap_on, vis.shots_displayed);
+//   distanceChart = new DistanceChart("distance-chart-area", vis.shotData);
+
+//   shotPieChart = new ShotPieChart("shot-pie-chart-area", vis.shotData);
+//   // console.log((timeline.xContext).domain())
+//   // Set new domain if brush (user selection) is not empty
+//   // areachart.x.domain(
+//   //     !selection ? timeline.xContext.domain() : selection.map(timeline.xContext.invert)
+
+//   // );
+//    // Update focus chart (detailed information)
+//   // areachart.wrangleData();
+
+// }
