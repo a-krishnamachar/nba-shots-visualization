@@ -16,12 +16,11 @@ $.getJSON("data/playerdata1.json", function (jsonData) {
   //display updated names as user types
   
 
-
-  console.log(recPlayers)
   displayResults(recPlayers);
 
   searchBar.addEventListener('keyup', (e) => {
     // console.log(e.target.value)
+
     const searchString = e.target.value;
 
     const filteredPlayers = jsonData.filter((player) => {
@@ -62,6 +61,10 @@ const displayResults = (players) => {
   playerList.innerHTML = htmlString;
 };
 var playerHelper = []
+
+svg = d3.selectAll("#introtext")
+console.log(svg)
+svg.selectAll("#playerHeading").style("color", "#89CFF0");
 
 var search = function(player) {
   if (playerHelper[0] != undefined){

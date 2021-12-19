@@ -178,6 +178,10 @@ body {
     display: grid;
     text-align: center;
 }
+.player:hover {	
+	color: #7084e6;
+	opacity: 1;
+  }
 h1 {
   text-align: center;
 }
