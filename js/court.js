@@ -271,7 +271,7 @@ CourtChart.prototype.updateVis = function () {
     .attr('cy', function (d, i) {
       return vis.height + 100 -pointYLocationScale(parseFloat(d[18]));
     })
-    .attr("r", 1)
+    .attr("r", 1.5)
     // .style("fill", "black")
     // .style("opacity", function (d, i) {
     //   if (d[10] == "Missed Shot") { return "0"; }
