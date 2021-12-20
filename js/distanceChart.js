@@ -157,6 +157,7 @@ DistanceChart.prototype.updateVis = function () {
         d3.select(".the-court").select("circle").remove();
         d3.select(".the-court").select("g").remove();
         d3.select(".the-court").remove();
+        d3.select("#heatmap-legend svg").remove();
         court = new CourtChart("court-area", vis.shotData, first_load, heatmap_on, shots_displayed, selectedDistanceMin, selectedDistanceMax);
 
     }
@@ -182,6 +183,8 @@ DistanceChart.prototype.updateVis = function () {
         d3.select(".the-court").select("circle").remove();
         d3.select(".the-court").select("g").remove();
         d3.select(".the-court").remove();
+        d3.select("#heatmap-legend svg").remove();
+
         // d3.select(".x-brush").remove();
         court = new CourtChart("court-area", vis.shotData, first_load, heatmap_on, shots_displayed, null, null);
     }

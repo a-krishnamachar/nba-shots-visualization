@@ -25,10 +25,14 @@ CourtChart.prototype.initVis = function () {
   vis.svg = d3.select("#court-area").append("svg")
     .attr("class", "the-court")
     .attr("viewBox", '0 0 500 500')
-    // .attr("width", "50%")
-    //.attr("width", widthCourt)
-    //.attr("height", heightCourt)
-    .append("g")
+    .append("g");
+
+    var legendHeight = 52;
+
+    vis.legendSvg = d3.select("#heatmap-legend").append("svg")
+    .attr("width", vis.width)
+    .attr("height", legendHeight)
+    .attr("transform", "translate(" + vis.margin.left + ",0)")
 
   var courtBackgroundURL = "data/nba_court.jpeg";
 
@@ -66,10 +70,59 @@ function CellStats(width_index, height_index, cell_percentage) {
 CourtChart.prototype.updateVis = function () {
 
   var vis = this;
-  console.log("first load? " + vis.first_load);
-  console.log("heatmap on? " + vis.heatmap_on);
-  console.log("shots displayed: " + vis.shots_displayed);
-  console.log(vis.shotData);
+
+      //Creates a legend element and assigns a scale that needs to be visualized
+      var legend_inputs = [0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8];
+
+      var legend_box = vis.legendSvg.selectAll(".legend-box")
+        .data(legend_inputs);
+
+      legend_box.enter().append("rect")
+        .merge(legend_box)
+        .attr("class", "legend-box")
+        .attr("fill", "red")
+        .attr("width", 35)
+        .attr("height", 35)
+        .attr("y", 5)
+        .attr("x", function(d, i) {
+          return 35*i;
+        })
+        .style("opacity", function(d, i) {
+          return d;
+        });
+
+      legend_box.exit().remove();
+
+      var legend_data = vis.legendSvg.selectAll(".legend-data")
+        .data(legend_inputs);
+
+      legend_data.enter().append("text")
+        .merge(legend_data)
+        .attr("class", "legend-data")
+        .style("opacity", function(d,i) {
+          if (i == 0 || i == 12) {
+            return 1.0;
+          }
+          else { return 0; }
+        })
+        .attr("x", function(d,i) {
+          if (i != 12) {
+            return 35 * i;
+          }
+          else { return 35 * i + 15;}
+        })
+        .attr("y", 52)
+        .text(function(d,i) {
+          if (i == 0) {
+            return "0.0";
+          }
+          else if (i == 12) {
+            return "1.0";
+          }
+          else { return ""; }
+        });
+
+      legend_data.exit().remove();
 
   vis.shotData.sort(function (a,b) {
     return parseFloat(a[16]) - parseFloat(b[16]);
@@ -106,13 +159,10 @@ CourtChart.prototype.updateVis = function () {
     .attr('type', 'checkbox')
     .attr('id', 'heatmap-checkbox')
     .property('checked', function() {
-      console.log("checkingggg heatmap on: " + vis.heatmap_on);
       if (vis.heatmap_on) {
-        console.log("nay");
         return true;
       }
       else {
-        console.log("yay");
         return false;
       }
     })
@@ -134,10 +184,8 @@ CourtChart.prototype.updateVis = function () {
     d3.select(".the-court").select("circle").remove();
     d3.select(".the-court").select("g").remove();
     d3.select(".the-court").remove();
+    d3.select("#heatmap-legend svg").remove();
     court = new CourtChart("court-area", vis.shotData, vis.first_load, vis.heatmap_on, vis.shots_displayed, vis.min_distance, vis.max_distance);
-    // distanceChart = new DistanceChart("distance-chart-area", vis.shotData);
-
-    // shotPieChart = new ShotPieChart("shot-pie-chart-area", vis.shotData);
 
   }
 
@@ -173,32 +221,20 @@ CourtChart.prototype.updateVis = function () {
   // GRID HEATMAP CREATION
 
   if (vis.heatmap_on) {
-    console.log("here now");
-    console.log(vis.shotData);
 
     var cellWidth = widthCourt / 15;
     var cellHeight = widthCourt / 15;
     var maxWidthIndex = 15;
     var maxHeightIndex = 14;
-    console.log("Cell width: " + cellWidth + " Cell height: " + cellHeight);
     for (let i = 0; i < vis.shotData.length; i++) {
       let widthIndex = parseInt(xLocationScale(vis.shotData[i][17]) / cellWidth);
-      // if (widthIndex > maxWidthIndex) {
-      //   maxWidthIndex = widthIndex;
-      // }
+
       let heightIndex = parseInt(cellYLocationScale(vis.shotData[i][18]) / cellHeight) - 1;
-      // if (heightIndex > maxHeightIndex) {
-      //   maxHeightIndex = heightIndex;
-      // }
-      // console.log(widthIndex + ", " + heightIndex);
+
       vis.shotData[i].width_index = widthIndex;
       vis.shotData[i].height_index = heightIndex;
 
     }
-    console.log("right here");
-    console.log(vis.shotData);
-    console.log("width in cells: " + maxWidthIndex);
-    console.log("height in cells: " + maxHeightIndex);
 
     var cellStatistics = [];
     for (let i = 0; i < maxWidthIndex; i++) {
@@ -219,8 +255,6 @@ CourtChart.prototype.updateVis = function () {
         cellStatistics.push(newCell);
       }
     }
-    console.log("cell stats");
-    console.log(cellStatistics);
 
     var heatCell = vis.svg.selectAll(".heat-cell")
       .data(cellStatistics);
@@ -236,10 +270,6 @@ CourtChart.prototype.updateVis = function () {
       })
       .attr("width", cellWidth)
       .attr("height", cellHeight)
-      // .attr("fill", function(d) {
-      //   return colorScale(d.cell_percentage);
-      // })
-      // .style("opacity", 0.4)
       .attr("fill", "red")
       .style("opacity", function(d) {
         return opacityScale(d.cell_percentage);
@@ -250,22 +280,8 @@ CourtChart.prototype.updateVis = function () {
 
   // SHOT POINT DYNAMIC CREATION
 
-  // if (vis.shots_displayed == "Made Shots") {
-  //   vis.shotData = vis.shotData.filter(function(value, index) {
-  //     return value[10] == "Made Shot";
-  //   })
-  // }
-  // else if (vis.shots_displayed == "Missed Shots") {
-  //   vis.shotData = vis.shotData.filter(function(value, index) {
-  //     return value[10] == "Missed Shot";
-  //   })
-  // }
-  // console.log(vis.shots_displayed);
-
   var shotPoint = vis.svg.selectAll(".shot-point")
     .data(vis.shotData);
-
-
 
   shotPoint.enter().append("circle")
     .merge(shotPoint)
@@ -277,11 +293,6 @@ CourtChart.prototype.updateVis = function () {
       return vis.height + 100 -pointYLocationScale(parseFloat(d[18]));
     })
     .attr("r", 1.5)
-    // .style("fill", "black")
-    // .style("opacity", function (d, i) {
-    //   if (d[10] == "Missed Shot") { return "0"; }
-    //   else { return "1"; }
-    // })
     .style("fill", function(d, i) {
       if (d[10] == "Missed Shot") { return "red" }
       else { return "black"}
@@ -304,8 +315,8 @@ CourtChart.prototype.updateVis = function () {
       console.log(i)
       div.transition().duration(200)
         .style("opacity", .8);
-        div	.html("Shot taken: " + i[21] + "<br/>"
-      + "Opponent: " + i[22]
+        div	.html(i[21].slice(4,6) + "/" + i[21].slice(6,8) + "/" + i[21].slice(0,4) + "<br/>"
+      + "vs. " + i[22]
     );
     })
     .on("mouseout", function(d) {
@@ -313,9 +324,6 @@ CourtChart.prototype.updateVis = function () {
         .style("opacity", 0);
     })
     .transition()
-    // .delay(function () {
-    //   return delayRandomizer(Math.random());
-    // })
     .delay(function(d,i) {
       if (vis.first_load) {
         return 5*i;
@@ -335,21 +343,6 @@ CourtChart.prototype.updateVis = function () {
   shotPoint.exit().remove();
 
   // END SHOT POINT DYNAMIC CREATION
-
-
-  function shotMouseOver(d, i) {
-
-    console.log("Here");
-    // console.log(i[10]);
-    // console.log(i[12]);
-    // console.log(i[13]);
-    // console.log(i[14]);
-    // console.log(i[1]);
-  }
-
-  function shotMouseOut(d) {
-
-  }
 
 
 }
