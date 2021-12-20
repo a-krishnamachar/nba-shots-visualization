@@ -139,11 +139,12 @@ function courtVis() {
 
   //create all graph titles
   document.getElementById('courtTitle').innerHTML = "Court Shot Distribution + Heatmap";
-  document.getElementById('playerCard').innerHTML = " Player Stats (per game) ";
+  document.getElementById('playerCard').innerHTML = " Player Stats (avg per game) ";
 
   document.getElementById('courtLegend').innerHTML = "This chart displays a player's shot map. Each black dot is a made shot; and each red dot is a missed shot."
     + " The heatmap shows shot accuracy at a specific quadrant. Hover over the dots for more.";
-  document.getElementById('distanceLegend').innerHTML = "This chart displays a player's shot accuracy the further they get from the hoop.";
+  document.getElementById('distanceLegend').innerHTML = "This chart displays a player's shot accuracy the further they get from the hoop." +
+  " Brush on the chart to see a selection of shots.";
 
   document.getElementById('lineGraphTitle').innerHTML = "Accuracy (%) v. Distance from Hoop (ft)";
   // document.getElementById('lineTooltipClearText').innerHTML = " i ";
@@ -155,9 +156,8 @@ function courtVis() {
   //   "The blue slices represent the portion of shots made and the red slices the portion of shots missed.";
   document.getElementById('pieLegend').innerHTML = "These pie charts represent the differences in 2-pointers and 3-pointers taken." +
     " The black slices represent the portion of shots made and the red slices the portion of shots missed." +
-    " The sizes are proportional to the number of shots taken.";
-
-
+    " The sizes are proportional to the number of shots taken." +
+    " Hover over the circles for more.";
 
   ///Instantiate visualization objects here
   first_load = true;
