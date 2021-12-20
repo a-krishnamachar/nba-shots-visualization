@@ -282,6 +282,7 @@ CourtChart.prototype.updateVis = function () {
 
   var shotPoint = vis.svg.selectAll(".shot-point")
     .data(vis.shotData);
+  var radius = 1.5;
 
   shotPoint.enter().append("circle")
     .merge(shotPoint)
@@ -313,6 +314,7 @@ CourtChart.prototype.updateVis = function () {
 
     .on("mouseover", function(d,i) {
       console.log(i)
+      d3.select(this).attr('r', 6)
       div.transition().duration(200)
         .style("opacity", .8);
         div	.html(i[21].slice(4,6) + "/" + i[21].slice(6,8) + "/" + i[21].slice(0,4) + "<br/>"
@@ -320,6 +322,8 @@ CourtChart.prototype.updateVis = function () {
     );
     })
     .on("mouseout", function(d) {
+      d3.select(this).attr('r', 1.5)
+
       div.transition().duration(300)
         .style("opacity", 0);
     })

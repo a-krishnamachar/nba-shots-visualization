@@ -88,30 +88,18 @@ ShotPieChart.prototype.updateVis = function () {
         .style('opacity', 0.7)
         .on("mouseover", function(d,i) {
             console.log(i)
+            d3.select(this).attr('fill', '#a7adb8');
             div.transition().duration(200)
               .style("opacity", .8);
               div	.html((i.data[1]*100).toFixed(2) + "% of " + i.data[0]
           );
           })
           .on("mouseout", function(d) {
+            d3.select(this).attr('fill', function (d) { return colorScale(d.data[1]) });
             div.transition().duration(300)
               .style("opacity", 0);
           });
 
-    // vis.svg.selectAll('slices')
-    //     .data(pie2_ready)
-    //     .enter()
-    //     .append('text')
-    //     .text(function(d) {
-    //         console.log(d);
-    //         return (100*d.data[1]).toFixed(2) + "%";
-    //     })
-    //     .attr("transform", function(d) {
-    //         return "translate(" + d3.arc().innerRadius(0).outerRadius(radiusScale(total_twoPointers / totalShots)).centroid(d) + ")";
-    //     })
-    //     .style("fill", "blue")
-    //     .style("text-anchor", "middle")
-    //     .style("opacity", 0.7);
 
     vis.svg.append("text")
         .text("2-PT FGs (" + total_twoPointers + " attempted)")
@@ -132,12 +120,15 @@ ShotPieChart.prototype.updateVis = function () {
         .style('opacity', 0.7)
         .on("mouseover", function(d,i) {
             console.log(i)
+            d3.select(this).attr('fill', '#a7adb8');
             div.transition().duration(200)
               .style("opacity", .8);
               div	.html((i.data[1]*100).toFixed(2) + "% of " + i.data[0]
           );
           })
           .on("mouseout", function(d) {
+            d3.select(this).attr('fill', function (d) { return colorScale(d.data[1]) });
+
             div.transition().duration(300)
               .style("opacity", 0);
           });
