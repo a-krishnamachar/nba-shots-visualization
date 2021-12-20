@@ -9,21 +9,19 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
 
-<body>
+<!-- <body> -->
+<body onload="document.body.style.opacity='1'">
+
   <script src="https://cdn.jsdelivr.net/npm/d3-color@3"></script>
   <script src="https://cdn.jsdelivr.net/npm/d3-interpolate@3"></script>
   <script src="https://cdn.jsdelivr.net/npm/d3-scale-chromatic@3"></script>
 
-  <!-- if want modal to show on pageload -->
-  <!-- <script>
-  $(document).ready(function(){
-      $("#myModal").modal('show');
-  });
-  </script> -->
 
-  <body onload="document.body.style.opacity='1'">
+
     <div id="processlink">
-    <a href="processbook.html">Process Book</a> <br>
+    <a href="processbook.html">Process Book</a> |
+    <a href="processbook.html">Demo</a>
+    <br>
     <a href="#playerHeading">Court + Distance View</a> |
     <a href="#pie-chart-total">Field Goal %</a>
     </div>
@@ -197,6 +195,13 @@
     <script type="text/javascript" src="data/playerdata1.json"></script>
 
     <script src="js/main.js"></script>
+
+    <!-- if want modal to show on pageload -->
+    <script type="text/javascript">
+        $(window).on('load', function() {
+            $('#myModal').modal('show');
+        });
+    </script>
   </body>
 
 </html>

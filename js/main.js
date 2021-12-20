@@ -142,7 +142,7 @@ function courtVis() {
   document.getElementById('playerCard').innerHTML = " Player Stats (avg per game) ";
 
   document.getElementById('courtLegend').innerHTML = "This chart displays a player's shot map. Each black dot is a made shot; and each red dot is a missed shot."
-    + " The heatmap shows shot accuracy at a specific quadrant. Hover over the dots for more.";
+    + " The heatmap shows shot accuracy at a specific quadrant (0.0 - 1.0). Hover over the dots for more.";
   document.getElementById('distanceLegend').innerHTML = "This chart displays a player's shot accuracy the further they get from the hoop." +
   " Brush on the chart to see a selection of shots.";
 
