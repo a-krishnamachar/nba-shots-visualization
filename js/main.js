@@ -9,7 +9,7 @@ allData = [];
 $.getJSON("data/playerdata1.json", function (jsonData) {
 
   // console.log(jsonData);
-  const recPlayers = [{'id': 201939, 'full_name': 'Stephen Curry', 'first_name': 'Stephen', 'last_name': 'Curry', 'is_active': 'True'},{'id': 203081, 'full_name': 'Damian Lillard', 'first_name': 'Damian', 'last_name': 'Lillard', 'is_active': "True"},{'id': 203954, 'full_name': 'Joel Embiid', 'first_name': 'Joel', 'last_name': 'Embiid', 'is_active': 'True'},{'id': 2544, 'full_name': 'LeBron James', 'first_name': 'LeBron', 'last_name': 'James', 'is_active': 'True'},{'id': 1629130, 'full_name': 'Duncan Robinson', 'first_name': 'Duncan', 'last_name': 'Robinson', 'is_active': 'True'},{'id': 203497, 'full_name': 'Rudy Gobert', 'first_name': 'Rudy', 'last_name': 'Gobert', 'is_active': 'True'},{'id': 203507, 'full_name': 'Giannis Antetokounmpo', 'first_name': 'Giannis', 'last_name': 'Antetokounmpo', 'is_active': 'True'},{'id': 1629029, 'full_name': 'Luka Doncic', 'first_name': 'Luka', 'last_name': 'Doncic', 'is_active': 'True'},{'id': 101108, 'full_name': 'Chris Paul', 'first_name': 'Chris', 'last_name': 'Paul', 'is_active': 'True'},{'id': 202711, 'full_name': 'Bojan Bogdanovic', 'first_name': 'Bojan', 'last_name': 'Bogdanovic', 'is_active': 'True'},{'id': 1627732, 'full_name': 'Ben Simmons', 'first_name': 'Ben', 'last_name': 'Simmons', 'is_active': 'True'},{'id': 1627741, 'full_name': 'Buddy Hield', 'first_name': 'Buddy', 'last_name': 'Hield', 'is_active': 'True'}]
+  const recPlayers = [{ 'id': 201939, 'full_name': 'Stephen Curry', 'first_name': 'Stephen', 'last_name': 'Curry', 'is_active': 'True' }, { 'id': 203081, 'full_name': 'Damian Lillard', 'first_name': 'Damian', 'last_name': 'Lillard', 'is_active': "True" }, { 'id': 203954, 'full_name': 'Joel Embiid', 'first_name': 'Joel', 'last_name': 'Embiid', 'is_active': 'True' }, { 'id': 2544, 'full_name': 'LeBron James', 'first_name': 'LeBron', 'last_name': 'James', 'is_active': 'True' }, { 'id': 1629130, 'full_name': 'Duncan Robinson', 'first_name': 'Duncan', 'last_name': 'Robinson', 'is_active': 'True' }, { 'id': 203497, 'full_name': 'Rudy Gobert', 'first_name': 'Rudy', 'last_name': 'Gobert', 'is_active': 'True' }, { 'id': 203507, 'full_name': 'Giannis Antetokounmpo', 'first_name': 'Giannis', 'last_name': 'Antetokounmpo', 'is_active': 'True' }, { 'id': 1629029, 'full_name': 'Luka Doncic', 'first_name': 'Luka', 'last_name': 'Doncic', 'is_active': 'True' }, { 'id': 101108, 'full_name': 'Chris Paul', 'first_name': 'Chris', 'last_name': 'Paul', 'is_active': 'True' }, { 'id': 202711, 'full_name': 'Bojan Bogdanovic', 'first_name': 'Bojan', 'last_name': 'Bogdanovic', 'is_active': 'True' }, { 'id': 1627732, 'full_name': 'Ben Simmons', 'first_name': 'Ben', 'last_name': 'Simmons', 'is_active': 'True' }, { 'id': 1627741, 'full_name': 'Buddy Hield', 'first_name': 'Buddy', 'last_name': 'Hield', 'is_active': 'True' }]
 
   const searchBar = document.getElementById('searchBar');
 
@@ -38,7 +38,7 @@ $.getJSON("data/playerdata1.json", function (jsonData) {
   searchBar.addEventListener('click', (e) => {
     const searchString = e.target.value;
     const filteredPlayers = jsonData.filter((player) => {
-    return (player.full_name.includes(searchString));
+      return (player.full_name.includes(searchString));
     });
     const playersSlice = filteredPlayers.slice(0, 12);
     displayResults(playersSlice);
@@ -66,8 +66,8 @@ svg = d3.selectAll("#introtext")
 console.log(svg)
 svg.selectAll("#playerHeading").style("color", "#89CFF0");
 
-var search = function(player) {
-  if (playerHelper[0] != undefined){
+var search = function (player) {
+  if (playerHelper[0] != undefined) {
     playerHelper[0].style.backgroundColor = "#eaeaea";
     playerHelper[0] = player
   } else {
@@ -83,14 +83,14 @@ function loadData(playerId, playerName) {
 
   //manually call player json file from specific year
   let fileName = playerId;
-  document.getElementById('playerHeading').innerHTML = playerName+ " | 2020-21";
+  document.getElementById('playerHeading').innerHTML = playerName + " | 2020-21";
 
   d3.json("data/player_data/" + fileName + ".json").then(function (jsonData) {
     shotData = jsonData;
 
     courtVis();
     loadPlayerCard(playerId, playerName);
-    })
+  })
 }
 
 //create player card on popup
@@ -108,7 +108,7 @@ function loadPlayerCard(playerId, playerName) {
     const arrayslots = [11, 12, 14, 19];
 
     var ul = document.getElementById('playerCard');
-    for (var i=3; i<7; i++) {
+    for (var i = 3; i < 7; i++) {
       var li = document.createElement("li");
       li.appendChild(document.createTextNode(infodata[1].headers[i] + ": " + infodata[1].rowSet[0][i]));
       ul.appendChild(li);
@@ -142,7 +142,7 @@ function courtVis() {
   document.getElementById('playerCard').innerHTML = " Player Stats (per game) ";
 
   document.getElementById('courtLegend').innerHTML = "This chart displays a player's shot map. Each black dot is a made shot; and each red dot is a missed shot."
-  + " The heatmap shows shot accuracy at a specific quadrant. Hover over the dots for more.";
+    + " The heatmap shows shot accuracy at a specific quadrant. Hover over the dots for more.";
   document.getElementById('distanceLegend').innerHTML = "This chart displays a player's shot accuracy the further they get from the hoop.";
 
   document.getElementById('lineGraphTitle').innerHTML = "Accuracy (%) v. Distance from Hoop (ft)";
@@ -167,6 +167,7 @@ function courtVis() {
   console.log("here heatmap on? " + heatmap_on);
   console.log("here shots displayed: " + shots_displayed);
   console.log(shotData);
+  d3.select(".brush-button").remove();
   court = new CourtChart("court-area", shotData, true, false, "All Shots", null, null);
 
   distanceChart = new DistanceChart("distance-chart-area", shotData);
@@ -192,9 +193,9 @@ function toolTip() {
 
 function autoScroll() {
   console.log("help!!")
-    $('html, body').animate({
-        scrollTop: $("#playerHeading").offset().top
-    }, 500);
+  $('html, body').animate({
+    scrollTop: $("#playerHeading").offset().top
+  }, 500);
 }
 
 // function brushed({selection}) {

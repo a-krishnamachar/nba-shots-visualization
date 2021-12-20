@@ -115,12 +115,17 @@ DistanceChart.prototype.updateVis = function () {
             .y(function (d) { return yScale(d.percentage); })
         );
 
-    var brush_button = d3.select("#distance-chart-area")
+    var brush_button = d3.select("#distance-chart-area");
+
+    brush_button.enter().append("button")
+        .merge(brush_button)
         .append("button")
         .attr("class", "brush-button")
         .attr("type", "submit")
         .text("Clear brush")
         .on("click", undoBrush);
+
+    brush_button.exit().remove();
 
     function brushed({ selection }) {
 
@@ -177,7 +182,7 @@ DistanceChart.prototype.updateVis = function () {
         d3.select(".the-court").select("circle").remove();
         d3.select(".the-court").select("g").remove();
         d3.select(".the-court").remove();
-        d3.select(".x-brush").remove();
+        // d3.select(".x-brush").remove();
         court = new CourtChart("court-area", vis.shotData, first_load, heatmap_on, shots_displayed, null, null);
     }
 
