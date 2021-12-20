@@ -318,7 +318,7 @@ CourtChart.prototype.updateVis = function () {
     // })
     .delay(function(d,i) {
       if (vis.first_load) {
-        return 10*i;
+        return 5*i;
       }
       else { return 1; }
     })

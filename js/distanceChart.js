@@ -89,7 +89,7 @@ DistanceChart.prototype.updateVis = function () {
 
     // Append brush component
     vis.svg.append("g")
-        .attr("class", "x brush")
+        .attr("class", "x-brush")
         .call(brush)
         .selectAll("rect")
         .attr("y", -6)
@@ -115,11 +115,15 @@ DistanceChart.prototype.updateVis = function () {
             .y(function (d) { return yScale(d.percentage); })
         );
 
+    var brush_button = d3.select("#distance-chart-area")
+        .append("button")
+        .attr("class", "brush-button")
+        .attr("type", "submit")
+        .text("Clear brush")
+        .on("click", undoBrush);
+
     function brushed({ selection }) {
 
-        // TO-DO: React to 'brushed' event
-        // console.log("brushing");
-        // console.log(selection);
         var distanceMax = distanceChart.xContext.domain()[1];
         var rangeMax = distanceChart.width;
         var distanceScale = d3.scaleLinear()
@@ -149,19 +153,32 @@ DistanceChart.prototype.updateVis = function () {
         d3.select(".the-court").select("g").remove();
         d3.select(".the-court").remove();
         court = new CourtChart("court-area", vis.shotData, first_load, heatmap_on, shots_displayed, selectedDistanceMin, selectedDistanceMax);
-        // distanceChart = new DistanceChart("distance-chart-area", vis.shotData);
 
-        // shotPieChart = new ShotPieChart("shot-pie-chart-area", vis.shotData);
+    }
 
-        // console.log((timeline.xContext).domain())
-        // Set new domain if brush (user selection) is not empty
-        // areachart.x.domain(
-        //     !selection ? timeline.xContext.domain() : selection.map(timeline.xContext.invert)
+    function undoBrush() {
 
-        // );
-        // Update focus chart (detailed information)
-        // areachart.wrangleData();
-
+        // updating
+        var heatmap_on;
+        if (d3.select('#heatmap-checkbox').property('checked')) {
+            console.log("heatmap on");
+            heatmap_on = true;
+        }
+        else {
+            console.log("heatmap off");
+            heatmap_on = false;
+        }
+        var first_load = false;
+        var shots_displayed = d3.select('#shot-select').property('value');
+        console.log(shots_displayed);
+        d3.select("#shot-select").remove();
+        d3.select("#heatmap-checkbox").remove();
+        d3.select("#toggle-text").remove();
+        d3.select(".the-court").select("circle").remove();
+        d3.select(".the-court").select("g").remove();
+        d3.select(".the-court").remove();
+        d3.select(".x-brush").remove();
+        court = new CourtChart("court-area", vis.shotData, first_load, heatmap_on, shots_displayed, null, null);
     }
 
 }

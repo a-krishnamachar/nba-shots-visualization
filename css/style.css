@@ -269,3 +269,13 @@ a:visited {
 	fill-opacity: .125;
 	shape-rendering: crispEdges;
   }
+
+.brush-button {
+	/* float: left; */
+}
+
+.brush-button:hover {
+	background-color: darkgray;
+	color: white;
+	
+}
