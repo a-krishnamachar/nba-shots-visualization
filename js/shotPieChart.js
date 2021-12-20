@@ -34,7 +34,7 @@ ShotPieChart.prototype.updateVis = function () {
     .style("opacity", 0);
 
     var totalShots = vis.shotData.length;
-    console.log("total shots: " + totalShots);
+    // console.log("total shots: " + totalShots);
     var twoPointers = vis.shotData.filter(function (value, index) {
         return value[12] == "2PT Field Goal";
     });
@@ -49,9 +49,8 @@ ShotPieChart.prototype.updateVis = function () {
     var madeThreePointers = threePointers.filter(function (value, index) {
         return value[10] == "Made Shot";
     })
-    console.log("here");
-    console.log(madeTwoPointers);
-    console.log(madeThreePointers);
+    // console.log(madeTwoPointers);
+    // console.log(madeThreePointers);
     var madeTwosCount = madeTwoPointers.length;
     var madeThreesCount = madeThreePointers.length;
     var twoPointPercentage = madeTwosCount / total_twoPointers;
@@ -87,7 +86,7 @@ ShotPieChart.prototype.updateVis = function () {
         .style('stroke-width', '2px')
         .style('opacity', 0.7)
         .on("mouseover", function(d,i) {
-            console.log(i)
+            // console.log(i)
             d3.select(this).attr('fill', '#a7adb8');
             div.transition().duration(200)
               .style("opacity", .8);
@@ -119,7 +118,7 @@ ShotPieChart.prototype.updateVis = function () {
         .style('stroke-width', '2px')
         .style('opacity', 0.7)
         .on("mouseover", function(d,i) {
-            console.log(i)
+            // console.log(i)
             d3.select(this).attr('fill', '#a7adb8');
             div.transition().duration(200)
               .style("opacity", .8);

@@ -63,7 +63,7 @@ const displayResults = (players) => {
 var playerHelper = []
 
 svg = d3.selectAll("#introtext")
-console.log(svg)
+
 svg.selectAll("#playerHeading").style("color", "#89CFF0");
 
 var search = function (player) {
@@ -163,10 +163,10 @@ function courtVis() {
   first_load = true;
   heatmap_on = false;
   shots_displayed = "All Shots";
-  console.log("here first load? " + first_load);
-  console.log("here heatmap on? " + heatmap_on);
-  console.log("here shots displayed: " + shots_displayed);
-  console.log(shotData);
+  // console.log("here first load? " + first_load);
+  // console.log("here heatmap on? " + heatmap_on);
+  // console.log("here shots displayed: " + shots_displayed);
+  // console.log(shotData);
   d3.select(".brush-button").remove();
   court = new CourtChart("court-area", shotData, true, false, "All Shots", null, null);
 
@@ -192,7 +192,7 @@ function toolTip() {
 // }
 
 function autoScroll() {
-  console.log("help!!")
+  // console.log("help!!")
   $('html, body').animate({
     scrollTop: $("#playerHeading").offset().top
   }, 500);

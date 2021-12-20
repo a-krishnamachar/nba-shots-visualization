@@ -17,7 +17,6 @@ DistanceChart.prototype.initVis = function () {
         .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
         .append("g")
         .attr("transform", "translate(" + vis.margin.left + "," + vis.margin.top + ")");
-    console.log("im' here!!!");
     this.updateVis();
 }
 
@@ -74,7 +73,7 @@ DistanceChart.prototype.updateVis = function () {
     vis.svg.append("g")
         .call(d3.axisLeft(yScale));
 
-    console.log("before make brush");
+    // console.log("before make brush");
 
     vis.xContext = d3.scaleLinear()
         .range([0, vis.width])
@@ -95,7 +94,7 @@ DistanceChart.prototype.updateVis = function () {
         .attr("y", -6)
         .attr("height", vis.height + 7);
 
-    console.log("after make brush");
+    // console.log("after make brush");
 
 
     vis.svg.append("text")
@@ -137,20 +136,20 @@ DistanceChart.prototype.updateVis = function () {
 
         var selectedDistanceMin = (distanceScale(selection[0]) + 1).toFixed(0);
         var selectedDistanceMax = (distanceScale(selection[1]) + 1).toFixed(0);
-        console.log("[" + selectedDistanceMin + ", " + selectedDistanceMax + "]");
+        // console.log("[" + selectedDistanceMin + ", " + selectedDistanceMax + "]");
         // updating
         var heatmap_on;
         if (d3.select('#heatmap-checkbox').property('checked')) {
-            console.log("heatmap on");
+            // console.log("heatmap on");
             heatmap_on = true;
         }
         else {
-            console.log("heatmap off");
+            // console.log("heatmap off");
             heatmap_on = false;
         }
         var first_load = false;
         var shots_displayed = d3.select('#shot-select').property('value');
-        console.log(shots_displayed);
+        // console.log(shots_displayed);
         d3.select("#shot-select").remove();
         d3.select("#heatmap-checkbox").remove();
         d3.select("#toggle-text").remove();
@@ -176,7 +175,7 @@ DistanceChart.prototype.updateVis = function () {
         }
         var first_load = false;
         var shots_displayed = d3.select('#shot-select').property('value');
-        console.log(shots_displayed);
+        // console.log(shots_displayed);
         d3.select("#shot-select").remove();
         d3.select("#heatmap-checkbox").remove();
         d3.select("#toggle-text").remove();

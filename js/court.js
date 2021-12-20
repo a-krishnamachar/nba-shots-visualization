@@ -215,8 +215,8 @@ CourtChart.prototype.updateVis = function () {
   .interpolator(d3.interpolateRdBu)
   .domain([1,0]);
 
-  console.log("now i'm here");
-  console.log(vis.heatmap_on);
+  // console.log("now i'm here");
+  // console.log(vis.heatmap_on);
 
   // GRID HEATMAP CREATION
 
@@ -313,7 +313,7 @@ CourtChart.prototype.updateVis = function () {
     )
 
     .on("mouseover", function(d,i) {
-      console.log(i)
+      // console.log(i)
       d3.select(this).attr('r', 6)
       div.transition().duration(200)
         .style("opacity", .8);
